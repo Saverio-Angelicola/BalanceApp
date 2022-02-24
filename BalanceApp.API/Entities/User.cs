@@ -10,7 +10,7 @@ namespace BalanceApp.API.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; private set; }
-        public string Password { get; set; }
+        public Password Password { get; private set; }
         public readonly List<BodyData> BodyDatas;
         public readonly List<Balance> Balances;
         public string Role { get; private set; }
