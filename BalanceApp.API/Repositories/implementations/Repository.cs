@@ -29,22 +29,19 @@ namespace BalanceApp.API.Repositories.implementations
 
         public async Task<TEntity> Create(TEntity entity)
         {
-            _context.Set<TEntity>().Add(entity);
-            await _context.SaveChangesAsync();
+            await _context.Set<TEntity>().AddAsync(entity);
             return entity;
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public TEntity Update(TEntity entity)
         {
             _context.Set<TEntity>().Update(entity);
-            await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<TEntity> Delete(TEntity entity)
+        public TEntity Delete(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
-            await _context.SaveChangesAsync();
             return entity;
         }
     }

@@ -1,4 +1,6 @@
 using BalanceApp.API.Datas;
+using BalanceApp.API.Datas.Contexts;
+using BalanceApp.API.Datas.UnitOfWork;
 using BalanceApp.API.Entities;
 using BalanceApp.API.Repositories.implementations;
 using BalanceApp.API.Repositories.interfaces;
@@ -48,7 +50,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddDbContext<Context>(options => options.UseNpgsql(connectionString));
 
 builder.Services.AddScoped<IContext, Context>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();

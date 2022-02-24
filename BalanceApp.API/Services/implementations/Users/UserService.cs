@@ -1,20 +1,19 @@
-﻿using BalanceApp.API.Dtos.Users;
+﻿using BalanceApp.API.Datas.UnitOfWork;
+using BalanceApp.API.Dtos.Users;
 using BalanceApp.API.Entities;
-using BalanceApp.API.Repositories.interfaces;
 using BalanceApp.API.Services.interfaces.Users;
-using BalanceApp.API.ValueObjects;
 using Microsoft.AspNetCore.Identity;
 
 namespace BalanceApp.API.Services.implementations.Users
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository userRepository;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IPasswordHasher<User> passwordHasher;
 
-        public UserService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher)
+        public UserService(IUnitOfWork unitOfWork, IPasswordHasher<User> passwordHasher)
         {
-            this.userRepository = userRepository;
+            this.unitOfWork = unitOfWork;
             this.passwordHasher = passwordHasher;
         }
 
@@ -22,35 +21,39 @@ namespace BalanceApp.API.Services.implementations.Users
         {
             User user = new(Guid.NewGuid(),createdUser.FirstName, createdUser.LastName, createdUser.Username, string.Empty);
             user.UpdatePassword(passwordHasher.HashPassword(user, createdUser.Password));
-            return await userRepository.Create(user);
+            await unitOfWork.Users.Create(user);
+            await unitOfWork.CompleteAsync();
+            return user;
         }
 
         public async Task<User> DeleteUser(string username)
         {
-            User user = await userRepository.FindByUsername(username);
-            return await userRepository.Delete(user);
+            User user = await unitOfWork.Users.FindByUsername(username);
+            unitOfWork.Users.Delete(user);
+            await unitOfWork.CompleteAsync();
+            return user;
 
         }
 
         public async Task<List<User>> GetAllUser()
         {
-            return await userRepository.FindAll();
+            return await unitOfWork.Users.FindAll();
         }
 
         public async Task<User> GetUserById(int id)
         {
-            return await userRepository.FindById(id);
+            return await unitOfWork.Users.FindById(id);
         }
 
         public async Task<User> GetUserByUsername(string username)
         {
-            return await userRepository.FindByUsername(username);
+            return await unitOfWork.Users.FindByUsername(username);
         }
 
         public async Task<User> UpdatePassword(string username, UpdateUserPasswordDto passwordDto)
         {
 
-            User user = await userRepository.FindByUsername(username);
+            User user = await unitOfWork.Users.FindByUsername(username);
             PasswordVerificationResult isPasswordValid = passwordHasher.VerifyHashedPassword(user, user.UserPassword, passwordDto.CurrentPassword);
 
             if (isPasswordValid != PasswordVerificationResult.Success)
@@ -58,12 +61,14 @@ namespace BalanceApp.API.Services.implementations.Users
                 throw new Exception("Password not valid !");
             }
             user.UpdatePassword(passwordHasher.HashPassword(user, passwordDto.NewPassword));
-            return await userRepository.Update(user);
+            unitOfWork.Users.Update(user);
+            await unitOfWork.CompleteAsync();
+            return user;
         }
 
         public async Task<User> UpdateUser(string username, UpdateUserDto updatedUser)
         {
-            User user = await userRepository.FindByUsername(username);
+            User user = await unitOfWork.Users.FindByUsername(username);
 
             if (updatedUser.FirstName?.Length > 0)
             {
@@ -75,7 +80,9 @@ namespace BalanceApp.API.Services.implementations.Users
                 user.LastName = updatedUser.LastName;
             }
 
-            return await userRepository.Update(user);
+            unitOfWork.Users.Update(user);
+            await unitOfWork.CompleteAsync();
+            return user;
         }
     }
 }
