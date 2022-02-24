@@ -15,7 +15,7 @@ namespace BalanceApp.API.Datas
             builder.Property(user => user.FirstName);
             builder.Property(user => user.LastName);
             builder.Property(user => user.UserName);
-            builder.Property(user => user.Password);
+            builder.Property(user => user.UserPassword).HasConversion(password=>password.Value, password=>new Password(password) );
             builder.Property(user => user.RegisterDate);
             builder.HasMany(typeof(Balance), "Balances");
             builder.HasMany(typeof(BodyData), "BodyDatas");
