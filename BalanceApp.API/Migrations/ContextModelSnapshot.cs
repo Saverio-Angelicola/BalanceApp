@@ -35,10 +35,6 @@ namespace BalanceApp.API.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -47,6 +43,10 @@ namespace BalanceApp.API.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserPassword")
                         .IsRequired()
                         .HasColumnType("text");
 

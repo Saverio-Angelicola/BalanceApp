@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BalanceApp.API.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220224090710_updateUser")]
-    partial class updateUser
+    [Migration("20220224093241_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,10 +37,6 @@ namespace BalanceApp.API.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -49,6 +45,10 @@ namespace BalanceApp.API.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserPassword")
                         .IsRequired()
                         .HasColumnType("text");
 
