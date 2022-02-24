@@ -10,7 +10,7 @@ namespace BalanceApp.API.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; private set; }
-        public Password Password { get; private set; }
+        public Password UserPassword { get; private set; }
         public readonly List<BodyData> BodyDatas;
         public readonly List<Balance> Balances;
         public string Role { get; private set; }
@@ -22,7 +22,7 @@ namespace BalanceApp.API.Entities
             FirstName = string.Empty;
             LastName = string.Empty;
             UserName = string.Empty;
-            Password = string.Empty;
+            UserPassword = string.Empty;
             BodyDatas = new();
             Balances = new();
             Role = "User";
@@ -34,7 +34,7 @@ namespace BalanceApp.API.Entities
             FirstName = firstName;
             LastName = lastName;
             UserName = userName;
-            Password = password;
+            UserPassword = new(password);
             BodyDatas = new List<BodyData>();
             Balances = new List<Balance>();
             RegisterDate = DateTime.UtcNow;
@@ -42,7 +42,13 @@ namespace BalanceApp.API.Entities
 
         }
 
-        public void ChangeRole(UserRole role)
+        public void UpdatePassword(string userPassword)
+        {
+            Password password = new(userPassword);
+            UserPassword = password;
+        }
+
+        public void UpdateRole(UserRole role)
         {
             switch (role)
             {
