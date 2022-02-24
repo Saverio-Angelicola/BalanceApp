@@ -1,4 +1,4 @@
-﻿using BalanceApp.API.Datas;
+﻿using BalanceApp.API.Datas.Contexts;
 using BalanceApp.API.Entities;
 using BalanceApp.API.Repositories.interfaces;
 using Microsoft.EntityFrameworkCore;

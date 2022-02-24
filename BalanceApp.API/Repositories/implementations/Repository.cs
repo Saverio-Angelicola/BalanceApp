@@ -1,4 +1,4 @@
-﻿using BalanceApp.API.Datas;
+﻿using BalanceApp.API.Datas.Contexts;
 using BalanceApp.API.Repositories.interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +21,10 @@ namespace BalanceApp.API.Repositories.implementations
 
         public async Task<TEntity> FindById(int id)
         {
-            return await _context.Set<TEntity>().FindAsync(id);
+           TEntity? entity =  await _context.Set<TEntity>().FindAsync(id);
+            if (entity is null)
+                throw new ArgumentException("entity is null");
+           return entity;
         }
 
         public async Task<TEntity> Create(TEntity entity)
