@@ -11,6 +11,7 @@ namespace BalanceApp.API.Datas
         {
             builder.HasKey(user => user.Id);
             builder.Property(user => user.Id).HasConversion(id => id.Value, id => new UserId(id));
+            builder.HasIndex(user => user.UserName).IsUnique();
             builder.Property(user => user.FirstName);
             builder.Property(user => user.LastName);
             builder.Property(user => user.UserName);
@@ -19,9 +20,6 @@ namespace BalanceApp.API.Datas
             builder.HasMany(typeof(Balance), "Balances");
             builder.HasMany(typeof(BodyData), "BodyDatas");
             builder.ToTable("Users");
-
-            // Without Custom Column Name
-            // builder.OwnsOne(user => user.Address);
 
 
         }

@@ -16,7 +16,18 @@ namespace BalanceApp.API.Entities
         public string Role { get; private set; }
         public DateTime RegisterDate { get; private set; }
 
-        public User() { }
+        public User() 
+        {
+            Id = Guid.NewGuid();
+            FirstName = String.Empty;
+            LastName = String.Empty;
+            UserName = String.Empty;
+            Password = String.Empty;
+            BodyDatas = new();
+            Balances = new();
+            Role = "User";
+            RegisterDate = DateTime.UtcNow;
+        }
         public User(Guid id, string firstName, string lastName, string userName, string password)
         {
             Id = id;

@@ -2,7 +2,7 @@
 using BalanceApp.API.Entities;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace BalanceApp.API.Services.interfaces.Tokens
+namespace BalanceApp.API.Services.interfaces.Auth
 {
     public interface ITokenService
     {

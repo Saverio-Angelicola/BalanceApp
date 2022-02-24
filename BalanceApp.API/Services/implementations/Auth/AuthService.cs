@@ -1,7 +1,6 @@
 ﻿using BalanceApp.API.Dtos.Auth;
 using BalanceApp.API.Entities;
 using BalanceApp.API.Services.interfaces.Auth;
-using BalanceApp.API.Services.interfaces.Tokens;
 using BalanceApp.API.Services.interfaces.Users;
 using Microsoft.AspNetCore.Identity;
 

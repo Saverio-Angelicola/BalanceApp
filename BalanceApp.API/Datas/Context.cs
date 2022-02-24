@@ -1,5 +1,4 @@
-﻿using BalanceApp.API.Datas;
-using BalanceApp.API.Entities;
+﻿using BalanceApp.API.Entities;
 using BalanceApp.API.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +14,7 @@ namespace BalanceApp.API.Datas
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            UserEntityTypeConfiguration configuration = new UserEntityTypeConfiguration();
+            UserEntityTypeConfiguration configuration = new();
             modelBuilder.ApplyConfiguration<Balance>(configuration);
             modelBuilder.ApplyConfiguration<BodyData>(configuration);
             modelBuilder.ApplyConfiguration<User>(configuration);
