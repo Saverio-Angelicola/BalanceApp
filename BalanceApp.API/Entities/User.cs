@@ -19,10 +19,10 @@ namespace BalanceApp.API.Entities
         public User() 
         {
             Id = Guid.NewGuid();
-            FirstName = String.Empty;
-            LastName = String.Empty;
-            UserName = String.Empty;
-            Password = String.Empty;
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            UserName = string.Empty;
+            Password = string.Empty;
             BodyDatas = new();
             Balances = new();
             Role = "User";
@@ -79,7 +79,7 @@ namespace BalanceApp.API.Entities
             return BodyDatas;
         }
 
-        public void AddBalance(ValueObjects.Balance balance)
+        public void AddBalance(Balance balance)
         {
             bool alreadyExists = Balances.Any(balance => balance.Name == balance.Name);
             if (alreadyExists)
@@ -90,7 +90,7 @@ namespace BalanceApp.API.Entities
             Balances.Add(balance);
         }
 
-        public void AddBalances(List<ValueObjects.Balance> balances)
+        public void AddBalances(List<Balance> balances)
         {
             foreach (var balance in balances)
             {
@@ -109,7 +109,7 @@ namespace BalanceApp.API.Entities
             Balances.Remove(balance);
         }
 
-        public ValueObjects.Balance GetBalance(string balanceName)
+        public Balance GetBalance(string balanceName)
         {
             var balance = Balances.FirstOrDefault(balance => balance.Name == balanceName);
             if (balance is null)

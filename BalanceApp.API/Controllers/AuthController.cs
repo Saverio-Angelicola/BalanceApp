@@ -1,8 +1,6 @@
 ﻿using BalanceApp.API.Dtos.Auth;
 using BalanceApp.API.Dtos.Users;
-using BalanceApp.API.Entities;
 using BalanceApp.API.Services.interfaces.Auth;
-using BalanceApp.API.Services.interfaces.Tokens;
 using BalanceApp.API.Services.interfaces.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +23,7 @@ namespace BalanceApp.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(CreateUserDto registerDto)
+        public async Task<IActionResult> Register(CreateUserDto registerDto)
         {
             try
             {
@@ -38,7 +36,7 @@ namespace BalanceApp.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<TokenDto>> Login(LoginDto user)
+        public async Task<IActionResult> Login(LoginDto user)
         {
             try
             {
@@ -52,7 +50,7 @@ namespace BalanceApp.API.Controllers
         }
 
         [HttpGet("profile"), Authorize]
-        public async Task<ActionResult<User>> GetProfile()
+        public async Task<IActionResult> GetProfile()
         {
             try
             {

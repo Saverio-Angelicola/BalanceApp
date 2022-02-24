@@ -1,6 +1,6 @@
 ﻿using BalanceApp.API.Dtos.Users;
 using BalanceApp.API.Entities;
-using BalanceApp.API.Services.interfaces.Tokens;
+using BalanceApp.API.Services.interfaces.Auth;
 using BalanceApp.API.Services.interfaces.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace BalanceApp.API.Controllers
         }
 
         [HttpDelete("delete"), Authorize]
-        public async Task<ActionResult<User>> DeleteUser()
+        public async Task<IActionResult> DeleteUser()
         {
             try
             {
@@ -35,8 +35,8 @@ namespace BalanceApp.API.Controllers
 
         }
 
-        [HttpPut("update"), Authorize]
-        public async Task<ActionResult<User>> UpdateUser(UpdateUserDto updateUser)
+        [HttpPut("infos/update"), Authorize]
+        public async Task<IActionResult> UpdateUser(UpdateUserDto updateUser)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace BalanceApp.API.Controllers
         }
 
         [HttpPut("password/update"), Authorize]
-        public async Task<ActionResult<User>> UpdatePassword(UpdateUserPasswordDto updatePassword)
+        public async Task<IActionResult> UpdatePassword(UpdateUserPasswordDto updatePassword)
         {
             try
             {
