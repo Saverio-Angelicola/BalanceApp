@@ -41,6 +41,7 @@
   <ItemGroup>
     <Folder Include="ClientApp\src\components\" />
     <Folder Include="ClientApp\src\pages\" />
+    <Folder Include="Datas\UnitOfWork\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
