@@ -24,7 +24,7 @@ namespace BalanceApp.API.Services.implementations.Auth
             try
             {
                 User user = await userService.GetUserByUsername(loginUser.UserName);
-                PasswordVerificationResult isPasswordValid = passwordHasher.VerifyHashedPassword(user, user.Password, loginUser.Password);
+                PasswordVerificationResult isPasswordValid = passwordHasher.VerifyHashedPassword(user, user.UserPassword, loginUser.Password);
 
                 if (isPasswordValid != PasswordVerificationResult.Success)
                 {
