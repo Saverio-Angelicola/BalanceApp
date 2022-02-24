@@ -21,7 +21,7 @@ namespace BalanceApp.API.Services.implementations.Users
         public async Task<User> CreateUser(CreateUserDto createdUser)
         {
             User user = new(Guid.NewGuid(),createdUser.FirstName, createdUser.LastName, createdUser.Username, string.Empty);
-            user.Password = passwordHasher.HashPassword(user, createdUser.Password);
+            user.UpdatePassword(passwordHasher.HashPassword(user, createdUser.Password));
             return await userRepository.Create(user);
         }
 
@@ -49,20 +49,15 @@ namespace BalanceApp.API.Services.implementations.Users
 
         public async Task<User> UpdatePassword(string username, UpdateUserPasswordDto passwordDto)
         {
-            if (passwordDto.CurrentPassword.Length <= 0 && passwordDto.NewPassword.Length <= 0)
-            {
-                throw new Exception("Current passsword and new password is empty !");
-            }
 
             User user = await userRepository.FindByUsername(username);
-            PasswordVerificationResult isPasswordValid = passwordHasher.VerifyHashedPassword(user, user.Password, passwordDto.CurrentPassword);
+            PasswordVerificationResult isPasswordValid = passwordHasher.VerifyHashedPassword(user, user.UserPassword, passwordDto.CurrentPassword);
 
             if (isPasswordValid != PasswordVerificationResult.Success)
             {
                 throw new Exception("Password not valid !");
             }
-
-            user.Password = passwordHasher.HashPassword(user, passwordDto.NewPassword);
+            user.UpdatePassword(passwordHasher.HashPassword(user, passwordDto.NewPassword));
             return await userRepository.Update(user);
         }
 
