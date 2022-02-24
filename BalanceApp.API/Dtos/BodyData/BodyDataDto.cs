@@ -1,6 +1,6 @@
 ﻿namespace BalanceApp.API.Dtos.BodyData
 {
-    public class BodyDataDto
+    public record BodyDataDto
     {
         public double MuscleRate { get; set; }
         public double BoneRate { get; set; }

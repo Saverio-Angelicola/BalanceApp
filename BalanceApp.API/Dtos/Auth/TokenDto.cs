@@ -1,6 +1,6 @@
 ﻿namespace BalanceApp.API.Dtos.Auth
 {
-    public class TokenDto
+    public record TokenDto
     {
         public string TokenJwt { get; set; }
         public DateTime ExpirationDate { get; set; }

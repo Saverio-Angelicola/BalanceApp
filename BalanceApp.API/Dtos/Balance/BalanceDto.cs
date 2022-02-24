@@ -1,6 +1,6 @@
 ﻿namespace BalanceApp.API.Dtos.Balance
 {
-    public class BalanceDto
+    public record BalanceDto
     {
         public string Name { get; set; }
         public string MacAdress { get; set; }

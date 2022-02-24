@@ -29,9 +29,9 @@ namespace BalanceApp.API.Controllers
             {
                 return Ok(await userService.CreateUser(registerDto));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
 
