@@ -5,7 +5,6 @@ using BalanceApp.API.Repositories.interfaces;
 using BalanceApp.API.Services.implementations.Auth;
 using BalanceApp.API.Services.implementations.Users;
 using BalanceApp.API.Services.interfaces.Auth;
-using BalanceApp.API.Services.interfaces.Tokens;
 using BalanceApp.API.Services.interfaces.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
