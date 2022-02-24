@@ -3,7 +3,7 @@ using BalanceApp.API.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BalanceApp.API.Datas
+namespace BalanceApp.API.Datas.Config
 {
     public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>, IEntityTypeConfiguration<Balance>, IEntityTypeConfiguration<BodyData>
     {
