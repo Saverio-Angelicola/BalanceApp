@@ -68,7 +68,7 @@ namespace BalanceApp.API.Entities
 
         public void AddBodyDatas(List<BodyData> bodyDatas)
         {
-            foreach (var bodyData in bodyDatas)
+            foreach (BodyData bodyData in bodyDatas)
             {
                 AddBodyData(bodyData);
             }
@@ -92,7 +92,7 @@ namespace BalanceApp.API.Entities
 
         public void AddBalances(List<Balance> balances)
         {
-            foreach (var balance in balances)
+            foreach (Balance balance in balances)
             {
                 AddBalance(balance);
             }
@@ -100,7 +100,7 @@ namespace BalanceApp.API.Entities
 
         public void DeleteBalance(string balanceName)
         {
-            var balance = Balances.FirstOrDefault(balance => balance.Name == balanceName);
+            Balance? balance = Balances.FirstOrDefault(balance => balance.Name == balanceName);
             if (balance is null)
             {
                 throw new BalanceNotFoundException(balanceName);
@@ -111,7 +111,7 @@ namespace BalanceApp.API.Entities
 
         public Balance GetBalance(string balanceName)
         {
-            var balance = Balances.FirstOrDefault(balance => balance.Name == balanceName);
+            Balance? balance = Balances.FirstOrDefault(balance => balance.Name == balanceName);
             if (balance is null)
             {
                 throw new BalanceNotFoundException(balanceName);
