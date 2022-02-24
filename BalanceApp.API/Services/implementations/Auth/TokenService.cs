@@ -1,6 +1,6 @@
 ﻿using BalanceApp.API.Dtos.Auth;
 using BalanceApp.API.Entities;
-using BalanceApp.API.Services.interfaces.Tokens;
+using BalanceApp.API.Services.interfaces.Auth;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
