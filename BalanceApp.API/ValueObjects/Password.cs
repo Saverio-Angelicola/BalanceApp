@@ -15,7 +15,7 @@ namespace BalanceApp.API.ValueObjects
             Value = password;
         }
 
-        public static implicit operator Password(string password) => new Password(password);
+        public static implicit operator Password(string password) => new(password);
         public static implicit operator string(Password value) => value.Value;
     }
 }
