@@ -1,5 +1,4 @@
 ﻿using BalanceApp.API.Dtos.Users;
-using BalanceApp.API.Entities;
 using BalanceApp.API.Services.interfaces.Auth;
 using BalanceApp.API.Services.interfaces.Users;
 using Microsoft.AspNetCore.Authorization;
@@ -20,7 +19,7 @@ namespace BalanceApp.API.Controllers
             this.tokenService = tokenService;
         }
 
-        [HttpDelete("delete"), Authorize]
+        [HttpDelete("profile/delete"), Authorize]
         public async Task<IActionResult> DeleteUser()
         {
             try
@@ -28,14 +27,14 @@ namespace BalanceApp.API.Controllers
                 string username = tokenService.GetUsernameFromJwtToken(HttpContext);
                 return Ok(await userService.DeleteUser(username));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
 
         }
 
-        [HttpPut("infos/update"), Authorize]
+        [HttpPut("profile/infos/update"), Authorize]
         public async Task<IActionResult> UpdateUser(UpdateUserDto updateUser)
         {
             try
@@ -43,13 +42,13 @@ namespace BalanceApp.API.Controllers
                 string username = tokenService.GetUsernameFromJwtToken(HttpContext);
                 return Ok(await userService.UpdateUser(username, updateUser));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
 
-        [HttpPut("password/update"), Authorize]
+        [HttpPut("profile/password/update"), Authorize]
         public async Task<IActionResult> UpdatePassword(UpdateUserPasswordDto updatePassword)
         {
             try
@@ -57,9 +56,9 @@ namespace BalanceApp.API.Controllers
                 string username = tokenService.GetUsernameFromJwtToken(HttpContext);
                 return Ok(await userService.UpdatePassword(username, updatePassword));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
     }

@@ -42,9 +42,9 @@ namespace BalanceApp.API.Controllers
             {
                 return Ok(await authService.Login(user));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Unauthorized();
+                return Unauthorized(ex.Message);
             }
 
         }
@@ -57,9 +57,9 @@ namespace BalanceApp.API.Controllers
                 string username = tokenService.GetUsernameFromJwtToken(HttpContext);
                 return Ok(await userService.GetUserByUsername(username));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
     }
