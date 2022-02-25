@@ -1,7 +1,7 @@
-﻿using BalanceApp.API.Dtos.Auth;
-using BalanceApp.API.Dtos.Users;
-using BalanceApp.API.Services.interfaces.Auth;
-using BalanceApp.API.Services.interfaces.Users;
+﻿using BalanceApp.API.Dtos.Users;
+using BalanceApp.Application.Services.interfaces.Auth;
+using BalanceApp.Application.Services.interfaces.Users;
+using BalanceApp.Domain.Dtos.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -54,7 +54,8 @@ namespace BalanceApp.API.Controllers
         {
             try
             {
-                string username = tokenService.GetUsernameFromJwtToken(HttpContext);
+                string bearerToken = HttpContext.Request.Headers.Authorization;
+                string username = tokenService.GetUsernameFromJwtToken(bearerToken);
                 return Ok(await userService.GetUserByUsername(username));
             }
             catch (Exception ex)
