@@ -1,6 +1,6 @@
 ﻿using BalanceApp.Domain.Entities;
 using BalanceApp.Domain.ValueObjects;
-using BalanceApp.Infrastructure.Datas.Config;
+using BalanceApp.Infrastructure.Config;
 using Microsoft.EntityFrameworkCore;
 
 namespace BalanceApp.Infrastructure.Datas.Contexts
@@ -11,7 +11,7 @@ namespace BalanceApp.Infrastructure.Datas.Contexts
 
         public Context() { }
 
-        public Context(DbContextOptions<Context> options) : base(options) 
+        public Context(DbContextOptions<Context> options) : base(options)
         {
 
         }
