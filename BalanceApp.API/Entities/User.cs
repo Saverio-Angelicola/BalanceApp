@@ -10,13 +10,13 @@ namespace BalanceApp.API.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; private set; }
-        public Password UserPassword { get; private set; }
+        public string UserPassword { get; private set; }
         public readonly List<BodyData> BodyDatas;
         public readonly List<Balance> Balances;
         public string Role { get; private set; }
         public DateTime RegisterDate { get; private set; }
 
-        public User() 
+        public User()
         {
             Id = Guid.NewGuid();
             FirstName = string.Empty;
@@ -34,7 +34,7 @@ namespace BalanceApp.API.Entities
             FirstName = firstName;
             LastName = lastName;
             UserName = userName;
-            UserPassword = new(password);
+            UserPassword = password;
             BodyDatas = new List<BodyData>();
             Balances = new List<Balance>();
             RegisterDate = DateTime.UtcNow;
@@ -42,9 +42,15 @@ namespace BalanceApp.API.Entities
 
         }
 
-        public void UpdatePassword(string userPassword)
+
+
+        public void UpdatePassword(string password)
         {
-            Password password = new(userPassword);
+            if (password.Length < 8)
+            {
+                throw new PasswordSizeException();
+            }
+
             UserPassword = password;
         }
 
