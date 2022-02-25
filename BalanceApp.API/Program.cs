@@ -1,9 +1,6 @@
-using BalanceApp.API.Datas;
 using BalanceApp.API.Datas.Contexts;
 using BalanceApp.API.Datas.UnitOfWork;
 using BalanceApp.API.Entities;
-using BalanceApp.API.Repositories.implementations;
-using BalanceApp.API.Repositories.interfaces;
 using BalanceApp.API.Services.implementations.Auth;
 using BalanceApp.API.Services.implementations.Users;
 using BalanceApp.API.Services.interfaces.Auth;
