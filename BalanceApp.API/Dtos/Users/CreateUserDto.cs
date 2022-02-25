@@ -1,4 +1,6 @@
-﻿namespace BalanceApp.API.Dtos.Users
+﻿using BalanceApp.API.Exceptions;
+
+namespace BalanceApp.API.Dtos.Users
 {
     public class CreateUserDto
     {
@@ -13,6 +15,10 @@
             FirstName = firstName;
             LastName = lastName;
             Username = username;
+            if (password.Length < 8)
+            {
+                throw new PasswordSizeException();
+            }
             Password = password;
         }
 
