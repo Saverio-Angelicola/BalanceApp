@@ -19,7 +19,7 @@ namespace BalanceApp.API.Services.implementations.Users
 
         public async Task<User> CreateUser(CreateUserDto createdUser)
         {
-            User user = new(Guid.NewGuid(),createdUser.FirstName, createdUser.LastName, createdUser.Username, string.Empty);
+            User user = new(Guid.NewGuid(), createdUser.FirstName, createdUser.LastName, createdUser.Username, createdUser.Password);
             user.UpdatePassword(passwordHasher.HashPassword(user, createdUser.Password));
             await unitOfWork.Users.Create(user);
             await unitOfWork.CompleteAsync();
@@ -40,7 +40,7 @@ namespace BalanceApp.API.Services.implementations.Users
             return await unitOfWork.Users.FindAll();
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetUserById(Guid id)
         {
             return await unitOfWork.Users.FindById(id);
         }
