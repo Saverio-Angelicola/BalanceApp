@@ -4,13 +4,15 @@ using BalanceApp.API.Datas.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace BalanceApp.API.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220224093241_InitialCreate")]
+    [Migration("20220225073309_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
