@@ -19,12 +19,15 @@ namespace BalanceApp.API.Repositories.implementations
             return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<TEntity> FindById(int id)
+        public async Task<TEntity> FindById(Guid id)
         {
-           TEntity? entity =  await _context.Set<TEntity>().FindAsync(id);
+            TEntity? entity = await _context.Set<TEntity>().FindAsync(id);
             if (entity is null)
+            {
                 throw new ArgumentException("entity is null");
-           return entity;
+            }
+
+            return entity;
         }
 
         public async Task<TEntity> Create(TEntity entity)
