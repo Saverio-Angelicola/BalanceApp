@@ -5,7 +5,7 @@ using BalanceApp.Domain.Dtos.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BalanceApp.API.Controllers
+namespace BalanceApp.UI.Controllers
 {
     [Route("api/auth")]
     [ApiController]
