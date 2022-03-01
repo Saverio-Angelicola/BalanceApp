@@ -1,4 +1,4 @@
-﻿namespace BalanceApp.Domain.Dtos.Auth
+﻿namespace BalanceApp.Application.Dtos.Auth
 {
     public record LoginDto
     {

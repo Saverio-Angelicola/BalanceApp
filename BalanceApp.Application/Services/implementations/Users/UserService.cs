@@ -1,7 +1,6 @@
-﻿using BalanceApp.API.Dtos.Users;
-using BalanceApp.Application.Datas;
+﻿using BalanceApp.Application.Datas;
+using BalanceApp.Application.Dtos.Users;
 using BalanceApp.Application.Services.interfaces.Users;
-using BalanceApp.Domain.Dtos.Users;
 using BalanceApp.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 

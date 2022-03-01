@@ -1,5 +1,5 @@
-﻿using BalanceApp.Application.Services.interfaces.Auth;
-using BalanceApp.Domain.Dtos.Auth;
+﻿using BalanceApp.Application.Dtos.Auth;
+using BalanceApp.Application.Services.interfaces.Auth;
 using BalanceApp.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;

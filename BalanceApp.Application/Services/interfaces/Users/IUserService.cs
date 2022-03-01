@@ -1,5 +1,4 @@
-﻿using BalanceApp.API.Dtos.Users;
-using BalanceApp.Domain.Dtos.Users;
+﻿using BalanceApp.Application.Dtos.Users;
 using BalanceApp.Domain.Entities;
 
 namespace BalanceApp.Application.Services.interfaces.Users

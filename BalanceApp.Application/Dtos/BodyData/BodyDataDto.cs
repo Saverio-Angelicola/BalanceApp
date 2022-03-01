@@ -1,4 +1,4 @@
-﻿namespace BalanceApp.Domain.Dtos.BodyData
+﻿namespace BalanceApp.Application.Dtos.BodyData
 {
     public record BodyDataDto
     {

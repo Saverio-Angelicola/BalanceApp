@@ -1,4 +1,4 @@
-﻿using BalanceApp.Domain.Dtos.Auth;
+﻿using BalanceApp.Application.Dtos.Auth;
 using BalanceApp.Domain.Entities;
 
 namespace BalanceApp.Application.Services.interfaces.Auth

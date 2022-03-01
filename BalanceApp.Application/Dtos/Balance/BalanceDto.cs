@@ -1,4 +1,4 @@
-﻿namespace BalanceApp.Domain.Dtos.Balance
+﻿namespace BalanceApp.Application.Dtos.Balance
 {
     public record BalanceDto
     {

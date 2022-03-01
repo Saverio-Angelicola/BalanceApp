@@ -1,4 +1,4 @@
-﻿namespace BalanceApp.Domain.Dtos.Users
+﻿namespace BalanceApp.Application.Dtos.Users
 {
     public class UpdateUserDto
     {

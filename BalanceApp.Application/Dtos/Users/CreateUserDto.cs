@@ -1,6 +1,6 @@
 ﻿using BalanceApp.Domain.Exceptions;
 
-namespace BalanceApp.API.Dtos.Users
+namespace BalanceApp.Application.Dtos.Users
 {
     public class CreateUserDto
     {
