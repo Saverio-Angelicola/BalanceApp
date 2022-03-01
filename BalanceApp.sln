@@ -9,19 +9,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{971140C6-67C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{789F8B08-DF31-4E06-BDE6-A973E94AEC18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceApp.Domain", "BalanceApp.Domain\BalanceApp.Domain.csproj", "{EF91604D-FDD0-4C1E-A729-4B86CFA030AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceApp.Domain", "BalanceApp.Domain\BalanceApp.Domain.csproj", "{EF91604D-FDD0-4C1E-A729-4B86CFA030AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceApp.Infrastructure", "BalanceApp.Infrastructure\BalanceApp.Infrastructure.csproj", "{1945AC76-E2B0-4859-BF28-5C0ADA90672E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceApp.Infrastructure", "BalanceApp.Infrastructure\BalanceApp.Infrastructure.csproj", "{1945AC76-E2B0-4859-BF28-5C0ADA90672E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceApp.Application", "BalanceApp.Application\BalanceApp.Application.csproj", "{0B91755F-8228-4EB4-BBD6-40EA859D2A4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceApp.Application", "BalanceApp.Application\BalanceApp.Application.csproj", "{0B91755F-8228-4EB4-BBD6-40EA859D2A4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceApp.Application.UnitTests", "BalanceApp.Application.UnitTests\BalanceApp.Application.UnitTests.csproj", "{8F24B223-5762-41C5-8851-C73283154C70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceApp.Application.UnitTests", "BalanceApp.Application.UnitTests\BalanceApp.Application.UnitTests.csproj", "{8F24B223-5762-41C5-8851-C73283154C70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceApp.Domain.UnitTests", "BalanceApp.Domain.UnitTests\BalanceApp.Domain.UnitTests.csproj", "{842CD5BA-CB06-4A0C-9E48-C6150D763730}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceApp.Domain.UnitTests", "BalanceApp.Domain.UnitTests\BalanceApp.Domain.UnitTests.csproj", "{842CD5BA-CB06-4A0C-9E48-C6150D763730}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceApp.Infrastructure.UnitTests", "BalanceApp.Infrastructure.UnitTests\BalanceApp.Infrastructure.UnitTests.csproj", "{5EC0CE78-A645-40D9-BA86-B587C4479F9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceApp.Infrastructure.UnitTests", "BalanceApp.Infrastructure.UnitTests\BalanceApp.Infrastructure.UnitTests.csproj", "{5EC0CE78-A645-40D9-BA86-B587C4479F9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceApp.UI.UnitTests", "BalanceApp.UI.UnitTests\BalanceApp.UI.UnitTests.csproj", "{EC5500A0-FC14-4325-8834-8866D8BD3927}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceApp.UI.UnitTests", "BalanceApp.UI.UnitTests\BalanceApp.UI.UnitTests.csproj", "{EC5500A0-FC14-4325-8834-8866D8BD3927}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
