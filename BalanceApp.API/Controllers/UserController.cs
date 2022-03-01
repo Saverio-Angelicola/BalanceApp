@@ -1,6 +1,6 @@
-﻿using BalanceApp.Application.Services.interfaces.Auth;
+﻿using BalanceApp.Application.Dtos.Users;
+using BalanceApp.Application.Services.interfaces.Auth;
 using BalanceApp.Application.Services.interfaces.Users;
-using BalanceApp.Domain.Dtos.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
