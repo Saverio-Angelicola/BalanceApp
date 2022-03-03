@@ -118,7 +118,18 @@ namespace BalanceApp.UI.UnitTests.Controllers
             //Act
             var result = await authController.GetProfile() as OkObjectResult;
             //Assert
-            result?.Value.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<User>());
+            result?.Should().BeOfType<OkObjectResult>();
+        }
+
+        [Fact]
+        public async Task GetProfile_WithException_ReturnsBadRequest()
+        {
+            //Arrange
+            userServiceStub.Setup(service => service.GetUserByUsername(It.IsAny<string>())).Throws(new Exception());
+            //Act
+            var result = await authController.GetProfile();
+            //Assert
+            result.Should().BeOfType<BadRequestObjectResult>();
         }
 
         internal static User CreateRandomUser()
