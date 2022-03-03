@@ -1,5 +1,6 @@
 ﻿using BalanceApp.Application.Repositories;
 using BalanceApp.Infrastructure.Datas.Contexts;
+using BalanceApp.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BalanceApp.Infrastructure.Repositories.implementations
@@ -24,7 +25,7 @@ namespace BalanceApp.Infrastructure.Repositories.implementations
             TEntity? entity = await _context.Set<TEntity>().FindAsync(id);
             if (entity is null)
             {
-                throw new ArgumentException("entity is null");
+                throw new EntityNotFoundException(id);
             }
 
             return entity;
