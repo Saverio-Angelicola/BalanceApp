@@ -42,8 +42,6 @@ namespace BalanceApp.Domain.Entities
 
         }
 
-
-
         public void UpdatePassword(string password)
         {
             if (password.Length < 8)
