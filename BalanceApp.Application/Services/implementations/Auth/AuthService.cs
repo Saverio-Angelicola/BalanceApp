@@ -1,4 +1,5 @@
 ﻿using BalanceApp.Application.Dtos.Auth;
+using BalanceApp.Application.Exceptions;
 using BalanceApp.Application.Services.interfaces.Auth;
 using BalanceApp.Application.Services.interfaces.Users;
 using BalanceApp.Domain.Entities;
@@ -28,14 +29,14 @@ namespace BalanceApp.Application.Services.implementations.Auth
 
                 if (isPasswordValid != PasswordVerificationResult.Success)
                 {
-                    throw new Exception("Password not valid!");
+                    throw new PasswordNotValidException();
                 }
 
                 return tokenService.CreateJwtToken(user);
             }
             catch (Exception)
             {
-                throw new Exception("Unauthorized");
+                throw new UnauthorizedAuthenticationException(loginUser.UserName);
             }
 
         }
