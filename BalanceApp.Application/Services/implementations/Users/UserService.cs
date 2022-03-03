@@ -1,5 +1,6 @@
 ﻿using BalanceApp.Application.Datas;
 using BalanceApp.Application.Dtos.Users;
+using BalanceApp.Application.Exceptions;
 using BalanceApp.Application.Services.interfaces.Users;
 using BalanceApp.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -58,7 +59,7 @@ namespace BalanceApp.Application.Services.implementations.Users
 
             if (isPasswordValid != PasswordVerificationResult.Success)
             {
-                throw new Exception("Password not valid !");
+                throw new PasswordNotValidException();
             }
             user.UpdatePassword(passwordHasher.HashPassword(user, passwordDto.NewPassword));
             unitOfWork.Users.Update(user);
