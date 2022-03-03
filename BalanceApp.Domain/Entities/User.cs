@@ -84,11 +84,6 @@ namespace BalanceApp.Domain.Entities
             }
         }
 
-        public List<BodyData> GetBodyDatas()
-        {
-            return BodyDatas;
-        }
-
         public void AddBalance(Balance balance)
         {
             bool alreadyExists = Balances.Any(balance => balance.Name == balance.Name);
