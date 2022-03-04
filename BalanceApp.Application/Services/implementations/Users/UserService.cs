@@ -20,7 +20,7 @@ namespace BalanceApp.Application.Services.implementations.Users
 
         public async Task<User> CreateUser(CreateUserDto createdUser)
         {
-            User user = new(Guid.NewGuid(), createdUser.FirstName, createdUser.LastName, createdUser.Username, createdUser.Password);
+            User user = new(Guid.NewGuid(), createdUser.FirstName, createdUser.LastName, createdUser.Email, createdUser.Password);
             user.UpdatePassword(passwordHasher.HashPassword(user, createdUser.Password));
             await unitOfWork.Users.Create(user);
             await unitOfWork.CompleteAsync();
@@ -29,7 +29,7 @@ namespace BalanceApp.Application.Services.implementations.Users
 
         public async Task<User> DeleteUser(string username)
         {
-            User user = await unitOfWork.Users.FindByUsername(username);
+            User user = await unitOfWork.Users.FindByEmail(username);
             unitOfWork.Users.Delete(user);
             await unitOfWork.CompleteAsync();
             return user;
@@ -48,13 +48,13 @@ namespace BalanceApp.Application.Services.implementations.Users
 
         public async Task<User> GetUserByUsername(string username)
         {
-            return await unitOfWork.Users.FindByUsername(username);
+            return await unitOfWork.Users.FindByEmail(username);
         }
 
         public async Task<User> UpdatePassword(string username, UpdateUserPasswordDto passwordDto)
         {
 
-            User user = await unitOfWork.Users.FindByUsername(username);
+            User user = await unitOfWork.Users.FindByEmail(username);
             PasswordVerificationResult isPasswordValid = passwordHasher.VerifyHashedPassword(user, user.UserPassword, passwordDto.CurrentPassword);
 
             if (isPasswordValid != PasswordVerificationResult.Success)
@@ -69,7 +69,7 @@ namespace BalanceApp.Application.Services.implementations.Users
 
         public async Task<User> UpdateUser(string username, UpdateUserDto updatedUser)
         {
-            User user = await unitOfWork.Users.FindByUsername(username);
+            User user = await unitOfWork.Users.FindByEmail(username);
 
             if (updatedUser.FirstName?.Length > 0)
             {

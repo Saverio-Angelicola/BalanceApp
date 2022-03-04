@@ -20,7 +20,7 @@ namespace BalanceApp.Application.Services.implementations.Auth
         {
             List<Claim> claims = new()
             {
-                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role)
             };
 
