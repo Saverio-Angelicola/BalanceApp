@@ -1,8 +1,10 @@
 ﻿using BalanceApp.API.Datas;
 using BalanceApp.Application.Datas;
 using BalanceApp.Application.Repositories;
+using BalanceApp.Application.Withings;
 using BalanceApp.Infrastructure.Datas.Contexts;
 using BalanceApp.Infrastructure.Repositories;
+using BalanceApp.Infrastructure.Withings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +21,7 @@ namespace BalanceApp.Infrastructure
             services.AddScoped<IContext, Context>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IWithingsApi, WithingsApi>();
             return services;
         }
     }

@@ -15,15 +15,15 @@ namespace BalanceApp.Infrastructure.Repositories
         {
             _context = context;
         }
-        public Task<User> FindByUsername(string username)
+        public Task<User> FindByEmail(string email)
         {
             try
             {
-                return _context.Set<User>().Where(user => user.UserName == username).FirstAsync();
+                return _context.Set<User>().Where(user => user.Email == email).FirstAsync();
             }
             catch (Exception)
             {
-                throw new UserNotFoundException(username);
+                throw new UserNotFoundException(email);
             }
             
         }

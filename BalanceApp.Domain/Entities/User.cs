@@ -9,7 +9,7 @@ namespace BalanceApp.Domain.Entities
         public UserId Id { get; private set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string UserName { get; private set; }
+        public string Email { get; private set; }
         public string UserPassword { get; private set; }
         public readonly List<BodyData> BodyDatas;
         public readonly List<Balance> Balances;
@@ -21,19 +21,19 @@ namespace BalanceApp.Domain.Entities
             Id = Guid.NewGuid();
             FirstName = string.Empty;
             LastName = string.Empty;
-            UserName = string.Empty;
+            Email = string.Empty;
             UserPassword = string.Empty;
             BodyDatas = new();
             Balances = new();
             Role = "User";
             RegisterDate = DateTime.UtcNow;
         }
-        public User(Guid id, string firstName, string lastName, string userName, string password)
+        public User(Guid id, string firstName, string lastName, string email, string password)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
-            UserName = userName;
+            Email = email;
             UserPassword = password;
             BodyDatas = new List<BodyData>();
             Balances = new List<Balance>();

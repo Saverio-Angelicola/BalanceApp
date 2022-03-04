@@ -6,15 +6,15 @@ namespace BalanceApp.Application.Dtos.Users
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Username { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
 
 
-        public CreateUserDto(string firstName, string lastName, string username, string password)
+        public CreateUserDto(string firstName, string lastName, string email, string password)
         {
             FirstName = firstName;
             LastName = lastName;
-            Username = username;
+            Email = email;
             if (password.Length < 8)
             {
                 throw new PasswordSizeException();
@@ -26,7 +26,7 @@ namespace BalanceApp.Application.Dtos.Users
         {
             FirstName = string.Empty;
             LastName = string.Empty;
-            Username = string.Empty;
+            Email = string.Empty;
             Password = string.Empty;
         }
     }

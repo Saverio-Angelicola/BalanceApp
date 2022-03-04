@@ -11,10 +11,10 @@ namespace BalanceApp.Infrastructure.Config
         {
             builder.HasKey(user => user.Id);
             builder.Property(user => user.Id).HasConversion(id => id.Value, id => new UserId(id));
-            builder.HasIndex(user => user.UserName).IsUnique();
+            builder.HasIndex(user => user.Email).IsUnique();
             builder.Property(user => user.FirstName);
             builder.Property(user => user.LastName);
-            builder.Property(user => user.UserName);
+            builder.Property(user => user.Email);
             builder.Property(user => user.UserPassword);
             builder.Property(user => user.RegisterDate);
             builder.HasMany(typeof(Balance), "Balances");
