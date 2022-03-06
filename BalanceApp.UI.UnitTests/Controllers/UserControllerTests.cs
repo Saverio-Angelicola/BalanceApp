@@ -2,12 +2,8 @@
 using BalanceApp.Application.Services.interfaces.Users;
 using BalanceApp.Domain.Entities;
 using BalanceApp.UI.Controllers;
-using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace BalanceApp.UI.UnitTests.Controllers
 {
@@ -24,17 +20,17 @@ namespace BalanceApp.UI.UnitTests.Controllers
             controller = new(userServiceStub.Object, tokenServiceStub.Object);
         }
 
-      /*  [Fact]
-        public async Task DeleteUser_WithCorrectUser_ReturnsOk()
-        {
-            //Arrange
-            User expected = CreateRandomUser();
-            userServiceStub.Setup(service=>service.DeleteUser(It.IsAny<string>())).ReturnsAsync(expected);
-            //Act
-            var result = await controller.DeleteUser();
-            //Assert
-            result.Should().BeOfType<OkObjectResult>();
-        } */
+        /*  [Fact]
+          public async Task DeleteUser_WithCorrectUser_ReturnsOk()
+          {
+              //Arrange
+              User expected = CreateRandomUser();
+              userServiceStub.Setup(service=>service.DeleteUser(It.IsAny<string>())).ReturnsAsync(expected);
+              //Act
+              var result = await controller.DeleteUser();
+              //Assert
+              result.Should().BeOfType<OkObjectResult>();
+          } */
 
         internal static User CreateRandomUser()
         {

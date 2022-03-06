@@ -20,7 +20,7 @@
         public string firstname { get; set; }
         public string lastname { get; set; }
 
-        public CreateUserWithingsDto(int height, int weight,string client_id, string nonce,string macAddress1,string macAddress2, string mailingpref, string birthdate, int gender, string email, string external_id, string firstname, string lastname)
+        public CreateUserWithingsDto(int height, int weight, string client_id, string nonce, string macAddress1, string macAddress2, string mailingpref, string birthdate, int gender, string email, string external_id, string firstname, string lastname)
         {
             this.action = "activate";
             this.client_id = client_id;
@@ -28,7 +28,7 @@
             this.signature = "";
             this.mailingpref = mailingpref;
             this.birthdate = birthdate;
-            this.measures = "[{'value': "+(height*100)+",'unit': -2,'type': 4},{'value': "+(weight*1000)+",'unit': -2,'type': 1}]";
+            this.measures = "[{'value': " + (height * 100) + ",'unit': -2,'type': 4},{'value': " + (weight * 1000) + ",'unit': -2,'type': 1}]";
             this.gender = gender;
             preflang = "fr_FR";
             unit_pref = "{'weight':1,'height':6,'distance':6,'temperature':11}";

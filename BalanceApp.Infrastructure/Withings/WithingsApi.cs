@@ -1,11 +1,6 @@
 ﻿using BalanceApp.Application.Withings;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BalanceApp.Infrastructure.Withings
 {
@@ -24,8 +19,8 @@ namespace BalanceApp.Infrastructure.Withings
         {
             try
             {
-                HttpContent content = new StringContent(json,Encoding.UTF8, "application/json");
-                await _httpClient.PostAsync(baseUrl + "user",content);
+                HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                await _httpClient.PostAsync(baseUrl + "user", content);
             }
             catch
             {

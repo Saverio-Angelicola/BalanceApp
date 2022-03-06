@@ -1,4 +1,6 @@
-﻿using BalanceApp.Application.Services.interfaces.Auth;
+﻿using BalanceApp.Application.Dtos.Auth;
+using BalanceApp.Application.Dtos.Users;
+using BalanceApp.Application.Services.interfaces.Auth;
 using BalanceApp.Application.Services.interfaces.Users;
 using BalanceApp.Domain.Entities;
 using BalanceApp.UI.Controllers;
@@ -7,8 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
 using System.Threading.Tasks;
-using BalanceApp.Application.Dtos.Auth;
-using BalanceApp.Application.Dtos.Users;
 using Xunit;
 
 namespace BalanceApp.UI.UnitTests.Controllers
@@ -48,7 +48,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
             //Act
             var result = await authController.Register(It.IsAny<CreateUserDto>()) as OkObjectResult;
             //Assert
-            result?.Value.Should().BeEquivalentTo(expected, options=>options.ComparingByMembers<User>());
+            result?.Value.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<User>());
         }
 
         [Fact]
@@ -66,7 +66,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         public async Task Login_WithCorrectUser_ReturnsOk()
         {
             //Arrange
-            TokenDto expected  = CreateRandomTokenDto();
+            TokenDto expected = CreateRandomTokenDto();
             authServiceStub.Setup(service => service.Login(It.IsAny<LoginDto>())).ReturnsAsync(expected);
             //Act
             var result = await authController.Login(It.IsAny<LoginDto>());
@@ -83,7 +83,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
             //Act
             var result = await authController.Login(It.IsAny<LoginDto>()) as OkObjectResult;
             //Assert
-            result?.Value.Should().BeEquivalentTo(expected,options=>options.ComparingByMembers<TokenDto>());
+            result?.Value.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<TokenDto>());
         }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
             //Act
             var result = await authController.GetProfile() as OkObjectResult;
             //Assert
-            result?.Value.Should().BeEquivalentTo(expected,options=>options.ComparingByMembers<User>());
+            result?.Value.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<User>());
         }
 
         [Fact]
@@ -135,7 +135,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         internal static User CreateRandomUser()
         {
             Guid guid = Guid.NewGuid();
-            return new(guid,guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString());
+            return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString());
         }
 
         internal static TokenDto CreateRandomTokenDto()

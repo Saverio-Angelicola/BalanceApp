@@ -78,7 +78,7 @@ namespace BalanceApp.Domain.UnitTests.Entities
             //Act
             user.AddBodyData(expected);
             //Assert
-            user.BodyDatas.FindLast(body=>true).Should().BeEquivalentTo(expected,options=>options.ComparingByMembers<BodyData>());
+            user.BodyDatas.FindLast(body => true).Should().BeEquivalentTo(expected, options => options.ComparingByMembers<BodyData>());
         }
 
         [Fact]
@@ -123,7 +123,7 @@ namespace BalanceApp.Domain.UnitTests.Entities
         {
             //Arrange
             User user = CreateRandomUser();
-            List<Balance> list = new() { CreateRandomBalance()};
+            List<Balance> list = new() { CreateRandomBalance() };
             //Act
             user.AddBalances(list);
             //Assert
@@ -162,7 +162,7 @@ namespace BalanceApp.Domain.UnitTests.Entities
             //Act
             Balance result = user.GetBalance("balance");
             //Assert
-            result.Should().BeEquivalentTo(expected,options=>options.ComparingByMembers<Balance>());
+            result.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<Balance>());
         }
 
         [Fact]

@@ -25,7 +25,7 @@ namespace BalanceApp.Infrastructure.Repositories
             {
                 throw new UserNotFoundException(email);
             }
-            
+
         }
     }
 }
