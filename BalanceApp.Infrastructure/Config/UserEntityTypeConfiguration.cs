@@ -2,34 +2,45 @@
 using BalanceApp.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BalanceApp.Infrastructure.Config
 {
-    public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>, IEntityTypeConfiguration<Balance>, IEntityTypeConfiguration<BodyData>
+    public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>, IEntityTypeConfiguration<Profile>, IEntityTypeConfiguration<BodyData>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+
+
             builder.HasKey(user => user.Id);
             builder.Property(user => user.Id).HasConversion(id => id.Value, id => new UserId(id));
             builder.HasIndex(user => user.Email).IsUnique();
-            builder.Property(user => user.FirstName);
-            builder.Property(user => user.LastName);
-            builder.Property(user => user.Email);
+            builder.Property(user => user.Firstname);
+            builder.Property(user => user.Lastname);
             builder.Property(user => user.UserPassword);
             builder.Property(user => user.RegisterDate);
-            builder.HasMany(typeof(Balance), "Balances");
-            builder.HasMany(typeof(BodyData), "BodyDatas");
-            builder.ToTable("Users");
+            builder.Property(user => user.Role);
+            builder.HasMany(typeof(Profile), "Profiles");
+            builder.ToTable("users");
 
 
         }
 
-        public void Configure(EntityTypeBuilder<Balance> builder)
+        public void Configure(EntityTypeBuilder<Profile> builder)
         {
+            var birthDateConverter = new ValueConverter<BirthDate, string>(b => b.ToString(),
+            b => BirthDate.Create(b));
+
             builder.Property<Guid>("Id");
-            builder.Property(b => b.Name);
-            builder.Property(b => b.MacAddress);
-            builder.ToTable("balances");
+            builder.Property(p => p.Firstname);
+            builder.Property(p => p.Lastname);
+            builder.Property(p => p.Gender);
+            builder.Property(typeof(BirthDate), "birthdate").HasConversion(birthDateConverter);
+            builder
+                .Property(p => p.BirthDate)
+                .HasConversion(b => b.ToString(), b => BirthDate.Create(b));
+            builder.HasMany(typeof(BodyData), "BodyDatas");
+            builder.ToTable("profiles");
         }
 
         public void Configure(EntityTypeBuilder<BodyData> builder)
