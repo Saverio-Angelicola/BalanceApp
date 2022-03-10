@@ -19,7 +19,7 @@ namespace BalanceApp.Infrastructure.Datas.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             UserEntityTypeConfiguration configuration = new();
-            modelBuilder.ApplyConfiguration<Balance>(configuration);
+            modelBuilder.ApplyConfiguration<Profile>(configuration);
             modelBuilder.ApplyConfiguration<BodyData>(configuration);
             modelBuilder.ApplyConfiguration<User>(configuration);
         }
