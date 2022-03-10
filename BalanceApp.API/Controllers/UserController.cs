@@ -19,7 +19,7 @@ namespace BalanceApp.UI.Controllers
             this.tokenService = tokenService;
         }
 
-        [HttpDelete("profile/delete"), Authorize]
+        [HttpDelete("user/delete"), Authorize]
         public async Task<IActionResult> DeleteUser()
         {
             try
@@ -35,7 +35,7 @@ namespace BalanceApp.UI.Controllers
 
         }
 
-        [HttpPut("profile/infos/update"), Authorize]
+        [HttpPut("user/infos/update"), Authorize]
         public async Task<IActionResult> UpdateUser(UpdateUserDto updateUser)
         {
             try
@@ -50,7 +50,7 @@ namespace BalanceApp.UI.Controllers
             }
         }
 
-        [HttpPut("profile/password/update"), Authorize]
+        [HttpPut("user/password/update"), Authorize]
         public async Task<IActionResult> UpdatePassword(UpdateUserPasswordDto updatePassword)
         {
             try
