@@ -20,16 +20,16 @@ namespace BalanceApp.Application.Services.implementations.Users
 
         public async Task<User> CreateUser(CreateUserDto createdUser)
         {
-            User user = new(Guid.NewGuid(), createdUser.FirstName, createdUser.LastName, createdUser.Email, createdUser.Password);
+            User user = new(Guid.NewGuid(),createdUser.FirstName,createdUser.LastName, createdUser.Email, createdUser.Password);
             user.UpdatePassword(passwordHasher.HashPassword(user, createdUser.Password));
             await unitOfWork.Users.Create(user);
             await unitOfWork.CompleteAsync();
             return user;
         }
 
-        public async Task<User> DeleteUser(string username)
+        public async Task<User> DeleteUser(string email)
         {
-            User user = await unitOfWork.Users.FindByEmail(username);
+            User user = await unitOfWork.Users.FindByEmail(email);
             unitOfWork.Users.Delete(user);
             await unitOfWork.CompleteAsync();
             return user;
@@ -46,15 +46,15 @@ namespace BalanceApp.Application.Services.implementations.Users
             return await unitOfWork.Users.FindById(id);
         }
 
-        public async Task<User> GetUserByUsername(string username)
+        public async Task<User> GetUserByUsername(string email)
         {
-            return await unitOfWork.Users.FindByEmail(username);
+            return await unitOfWork.Users.FindByEmail(email);
         }
 
-        public async Task<User> UpdatePassword(string username, UpdateUserPasswordDto passwordDto)
+        public async Task<User> UpdatePassword(string email, UpdateUserPasswordDto passwordDto)
         {
 
-            User user = await unitOfWork.Users.FindByEmail(username);
+            User user = await unitOfWork.Users.FindByEmail(email);
             PasswordVerificationResult isPasswordValid = passwordHasher.VerifyHashedPassword(user, user.UserPassword, passwordDto.CurrentPassword);
 
             if (isPasswordValid != PasswordVerificationResult.Success)
@@ -67,18 +67,18 @@ namespace BalanceApp.Application.Services.implementations.Users
             return user;
         }
 
-        public async Task<User> UpdateUser(string username, UpdateUserDto updatedUser)
+        public async Task<User> UpdateUser(string email, UpdateUserDto updatedUser)
         {
-            User user = await unitOfWork.Users.FindByEmail(username);
+            User user = await unitOfWork.Users.FindByEmail(email);
 
             if (updatedUser.FirstName?.Length > 0)
             {
-                user.FirstName = updatedUser.FirstName;
+                user.Firstname = updatedUser.FirstName;
             }
 
             if (updatedUser.LastName?.Length > 0)
             {
-                user.LastName = updatedUser.LastName;
+                user.Lastname = updatedUser.LastName;
             }
 
             unitOfWork.Users.Update(user);
