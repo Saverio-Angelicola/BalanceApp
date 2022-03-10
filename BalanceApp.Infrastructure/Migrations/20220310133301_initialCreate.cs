@@ -1,20 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace BalanceApp.Infrastructure.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    FirstName = table.Column<string>(type: "text", nullable: false),
-                    LastName = table.Column<string>(type: "text", nullable: false),
+                    Firstname = table.Column<string>(type: "text", nullable: false),
+                    Lastname = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     UserPassword = table.Column<string>(type: "text", nullable: false),
                     Role = table.Column<string>(type: "text", nullable: false),
@@ -22,25 +23,28 @@ namespace BalanceApp.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "balances",
+                name: "profiles",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    MacAddress = table.Column<string>(type: "text", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: true)
+                    Firstname = table.Column<string>(type: "text", nullable: false),
+                    Lastname = table.Column<string>(type: "text", nullable: false),
+                    Gender = table.Column<string>(type: "text", nullable: false),
+                    BirthDate = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: true),
+                    birthdate = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_balances", x => x.Id);
+                    table.PrimaryKey("PK_profiles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_balances_Users_UserId",
+                        name: "FK_profiles_users_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "users",
                         principalColumn: "Id");
                 });
 
@@ -58,31 +62,31 @@ namespace BalanceApp.Infrastructure.Migrations
                     HeartBeat = table.Column<double>(type: "double precision", nullable: false),
                     BodyMassIndex = table.Column<double>(type: "double precision", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: true)
+                    ProfileId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_bodyDatas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_bodyDatas_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
+                        name: "FK_bodyDatas_profiles_ProfileId",
+                        column: x => x.ProfileId,
+                        principalTable: "profiles",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_balances_UserId",
-                table: "balances",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_bodyDatas_UserId",
+                name: "IX_bodyDatas_ProfileId",
                 table: "bodyDatas",
+                column: "ProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_profiles_UserId",
+                table: "profiles",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_Email",
-                table: "Users",
+                name: "IX_users_Email",
+                table: "users",
                 column: "Email",
                 unique: true);
         }
@@ -90,13 +94,13 @@ namespace BalanceApp.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "balances");
-
-            migrationBuilder.DropTable(
                 name: "bodyDatas");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "profiles");
+
+            migrationBuilder.DropTable(
+                name: "users");
         }
     }
 }

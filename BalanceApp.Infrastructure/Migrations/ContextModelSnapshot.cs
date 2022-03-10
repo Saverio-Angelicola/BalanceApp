@@ -31,11 +31,11 @@ namespace BalanceApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("Firstname")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("Lastname")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -55,31 +55,7 @@ namespace BalanceApp.Infrastructure.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.Balance", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("MacAddress")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("balances", (string)null);
+                    b.ToTable("users", (string)null);
                 });
 
             modelBuilder.Entity("BalanceApp.Domain.ValueObjects.BodyData", b =>
@@ -109,7 +85,7 @@ namespace BalanceApp.Infrastructure.Migrations
                     b.Property<double>("MuscleRate")
                         .HasColumnType("double precision");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid?>("ProfileId")
                         .HasColumnType("uuid");
 
                     b.Property<double>("WaterRate")
@@ -120,29 +96,67 @@ namespace BalanceApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("bodyDatas", (string)null);
                 });
 
-            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.Balance", b =>
+            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.Profile", b =>
                 {
-                    b.HasOne("BalanceApp.Domain.Entities.User", null)
-                        .WithMany("Balances")
-                        .HasForeignKey("UserId");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("BirthDate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("birthdate")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("profiles", (string)null);
                 });
 
             modelBuilder.Entity("BalanceApp.Domain.ValueObjects.BodyData", b =>
                 {
-                    b.HasOne("BalanceApp.Domain.Entities.User", null)
+                    b.HasOne("BalanceApp.Domain.ValueObjects.Profile", null)
                         .WithMany("BodyDatas")
+                        .HasForeignKey("ProfileId");
+                });
+
+            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.Profile", b =>
+                {
+                    b.HasOne("BalanceApp.Domain.Entities.User", null)
+                        .WithMany("Profiles")
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("BalanceApp.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Balances");
+                    b.Navigation("Profiles");
+                });
 
+            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.Profile", b =>
+                {
                     b.Navigation("BodyDatas");
                 });
 #pragma warning restore 612, 618
