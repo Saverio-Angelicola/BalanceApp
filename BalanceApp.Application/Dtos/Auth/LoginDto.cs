@@ -2,18 +2,18 @@
 {
     public record LoginDto
     {
-        public string UserName { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
 
-        public LoginDto(string userName, string password)
+        public LoginDto(string email, string password)
         {
-            UserName = userName;
+            Email = email;
             Password = password;
         }
 
         public LoginDto()
         {
-            UserName = string.Empty;
+            Email = string.Empty;
             Password = string.Empty;
         }
     }
