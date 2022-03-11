@@ -31,8 +31,9 @@ namespace BalanceApp.Infrastructure.Config
             var birthDateConverter = new ValueConverter<BirthDate, string>(b => b.ToString(),
             b => BirthDate.Create(b));
 
-            builder.Property<Guid>("Id");
+            builder.Property(p => p.Id);
             builder.Property(p => p.Firstname);
+            builder.Property(p => p.Height);
             builder.Property(p => p.Lastname);
             builder.Property(p => p.Gender);
             builder.Property(typeof(BirthDate), "birthdate").HasConversion(birthDateConverter);
@@ -47,7 +48,6 @@ namespace BalanceApp.Infrastructure.Config
         {
             builder.Property<Guid>("Id");
             builder.Property(bd => bd.Weight);
-            builder.Property(bd => bd.Height);
             builder.Property(bd => bd.FatMassRate);
             builder.Property(bd => bd.WaterRate);
             builder.Property(bd => bd.MuscleRate);
