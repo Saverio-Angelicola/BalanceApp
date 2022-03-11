@@ -5,7 +5,7 @@ namespace BalanceApp.Application.Services.interfaces.Users
 {
     public interface IUserService
     {
-        Task<User> GetUserByUsername(string username);
+        Task<User> GetUserByEmail(string email);
         Task<List<User>> GetAllUser();
         Task<User> GetUserById(Guid id);
         Task<User> CreateUser(CreateUserDto createdUser);
