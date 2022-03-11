@@ -26,7 +26,7 @@ namespace BalanceApp.Domain.Entities
             Role = "User";
             RegisterDate = DateTime.UtcNow;
         }
-        public User(Guid id,string firstname, string lastname, string email, string password, string role = "User")
+        public User(Guid id, string firstname, string lastname, string email, string password, string role = "User")
         {
             Id = id;
             Email = email;
@@ -36,7 +36,6 @@ namespace BalanceApp.Domain.Entities
             Profiles = new();
             RegisterDate = DateTime.UtcNow;
             Role = role;
-
         }
 
         public void UpdatePassword(string password)
@@ -58,6 +57,59 @@ namespace BalanceApp.Domain.Entities
                 'U' => "User",
                 _ => "User",
             };
+        }
+
+        public void AddProfile(Profile profile)
+        {
+            Profiles.Add(profile);
+        }
+
+        public void UpdateProfile(Guid id, Profile updatedProfile)
+        {
+            var profile = Profiles.FirstOrDefault(p => p.Id == id);
+            if (profile is null)
+            {
+                throw new ProfileNotFoundException(id.ToString());
+            }
+            Profiles.Remove(profile);
+            Profiles.Add(updatedProfile);
+            
+        }
+
+        public void DeleteProfile(Guid id)
+        {
+            var profile = Profiles.FirstOrDefault(p => p.Id == id);
+            if (profile is null)
+            {
+                throw new ProfileNotFoundException(id.ToString());
+            }
+
+            Profiles.Remove(profile);
+        }
+
+        public Profile GetProfile(Guid id)
+        {
+            var profile = Profiles.FirstOrDefault(p => p.Id == id);
+            if (profile is null)
+            {
+                throw new ProfileNotFoundException(id.ToString());
+            }
+
+            return profile;
+        }
+
+        public void AddBodyData(Guid profileId, BodyData bodyData)
+        {
+            GetProfile(profileId).BodyDatas.Add(bodyData);
+        }
+
+        public void AddBodyDatas(Guid profileId, List<BodyData> bodyDatas)
+        {
+
+            foreach (BodyData bodyData in bodyDatas)
+            {
+                AddBodyData(profileId, bodyData);
+            }
         }
     }
 }
