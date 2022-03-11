@@ -6,6 +6,6 @@ namespace BalanceApp.Application.Services.interfaces.Auth
     public interface ITokenService
     {
         TokenDto CreateJwtToken(User user);
-        string GetUsernameFromJwtToken(string bearerToken);
+        string GetEmailFromJwtToken(string bearerToken);
     }
 }
