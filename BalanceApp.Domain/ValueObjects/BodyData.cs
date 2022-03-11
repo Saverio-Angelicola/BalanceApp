@@ -5,7 +5,6 @@ namespace BalanceApp.Domain.ValueObjects
     public record BodyData
     {
         public double Weight { get; }
-        public double Height { get; }
         public double FatMassRate { get; }
         public double WaterRate { get; }
         public double MuscleRate { get; }
@@ -26,7 +25,6 @@ namespace BalanceApp.Domain.ValueObjects
                 throw new BodyDataPositiveValueException();
             }
             Weight = weight;
-            Height = height;
             FatMassRate = fatMassRate;
             WaterRate = waterRate;
             MuscleRate = muscleRate;
