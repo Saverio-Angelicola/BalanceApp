@@ -1,4 +1,6 @@
-﻿namespace BalanceApp.Domain.ValueObjects
+﻿using BalanceApp.Domain.Exceptions;
+
+namespace BalanceApp.Domain.ValueObjects
 {
     public record BirthDate(int days, int months, int years)
     {
@@ -8,11 +10,19 @@
 
         public static BirthDate Create(string birthdate)
         {
-            string[] birthDateSplit = birthdate.Split("/");
-            int days = Convert.ToInt32(birthDateSplit.FirstOrDefault());
-            int months = Convert.ToInt32(birthDateSplit[1]);
-            int years = Convert.ToInt32(birthDateSplit.LastOrDefault());
-            return new(days, months, years);
+            try
+            {
+                string[] birthDateSplit = birthdate.Split("/");
+                int days = Convert.ToInt32(birthDateSplit.FirstOrDefault());
+                int months = Convert.ToInt32(birthDateSplit[1]);
+                int years = Convert.ToInt32(birthDateSplit.LastOrDefault());
+                return new(days, months, years);
+            }
+            catch (Exception)
+            {
+                throw new IncorrectBirthDateFormatException();
+            }
+
         }
 
         public override string ToString()
