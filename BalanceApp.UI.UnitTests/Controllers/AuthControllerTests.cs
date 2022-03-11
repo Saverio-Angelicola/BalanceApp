@@ -102,7 +102,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         {
             //Arrange
             User expected = CreateRandomUser();
-            userServiceStub.Setup(service => service.GetUserByUsername(It.IsAny<string>())).ReturnsAsync(expected);
+            userServiceStub.Setup(service => service.GetUserByEmail(It.IsAny<string>())).ReturnsAsync(expected);
             //Act
             var result = await authController.GetProfile() as OkObjectResult;
             //Assert
@@ -114,7 +114,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         {
             //Arrange
             User expected = CreateRandomUser();
-            userServiceStub.Setup(service => service.GetUserByUsername(It.IsAny<string>())).ReturnsAsync(expected);
+            userServiceStub.Setup(service => service.GetUserByEmail(It.IsAny<string>())).ReturnsAsync(expected);
             //Act
             var result = await authController.GetProfile() as OkObjectResult;
             //Assert
@@ -125,7 +125,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         public async Task GetProfile_WithException_ReturnsBadRequest()
         {
             //Arrange
-            userServiceStub.Setup(service => service.GetUserByUsername(It.IsAny<string>())).Throws(new Exception());
+            userServiceStub.Setup(service => service.GetUserByEmail(It.IsAny<string>())).Throws(new Exception());
             //Act
             var result = await authController.GetProfile();
             //Assert
