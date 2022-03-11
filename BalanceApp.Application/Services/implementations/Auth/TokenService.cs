@@ -36,7 +36,7 @@ namespace BalanceApp.Application.Services.implementations.Auth
             return tokenDto;
         }
 
-        public string GetUsernameFromJwtToken(string bearerToken)
+        public string GetEmailFromJwtToken(string bearerToken)
         {
             string token = bearerToken.Remove(0, 7);
             string username = new JwtSecurityTokenHandler().ReadJwtToken(token).Payload.Claims.ElementAt(0).Value; ;

@@ -24,7 +24,7 @@ namespace BalanceApp.Application.Services.implementations.Auth
         {
             try
             {
-                User user = await userService.GetUserByUsername(loginUser.UserName);
+                User user = await userService.GetUserByEmail(loginUser.Email);
                 PasswordVerificationResult isPasswordValid = passwordHasher.VerifyHashedPassword(user, user.UserPassword, loginUser.Password);
 
                 if (isPasswordValid != PasswordVerificationResult.Success)
@@ -36,7 +36,7 @@ namespace BalanceApp.Application.Services.implementations.Auth
             }
             catch (Exception)
             {
-                throw new UnauthorizedAuthenticationException(loginUser.UserName);
+                throw new UnauthorizedAuthenticationException(loginUser.Email);
             }
 
         }
