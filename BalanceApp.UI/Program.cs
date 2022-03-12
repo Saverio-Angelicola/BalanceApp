@@ -8,6 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("origins",
+                          builder =>
+                          {
+                              builder.WithOrigins("https://localhost:44498")
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyMethod();
+                          });
+});
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews();
 builder.Services.AddApplication();
@@ -39,7 +50,7 @@ else
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("origins");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
