@@ -1,9 +1,10 @@
-﻿using BalanceApp.Domain.Entities;
+﻿using BalanceApp.Application.Datas;
+using BalanceApp.Domain.Entities;
 using BalanceApp.Domain.ValueObjects;
 using BalanceApp.Infrastructure.Config;
 using Microsoft.EntityFrameworkCore;
 
-namespace BalanceApp.Infrastructure.Datas.Contexts
+namespace BalanceApp.Infrastructure.Datas
 {
     public class Context : DbContext, IContext
     {

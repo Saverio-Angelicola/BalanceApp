@@ -5,7 +5,7 @@
         Task<List<TEntity>> FindAll();
         Task<TEntity> FindById(Guid id);
         Task<TEntity> Create(TEntity entity);
-        TEntity Update(TEntity entity);
-        TEntity Delete(TEntity entity);
+        Task<TEntity> Update(TEntity entity);
+        Task<TEntity> Delete(TEntity entity);
     }
 }

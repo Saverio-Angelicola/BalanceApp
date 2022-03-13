@@ -1,7 +1,7 @@
 ﻿using BalanceApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace BalanceApp.Infrastructure.Datas.Contexts
+namespace BalanceApp.Application.Datas
 {
     public interface IContext
     {

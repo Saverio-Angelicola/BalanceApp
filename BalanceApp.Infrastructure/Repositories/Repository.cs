@@ -1,9 +1,9 @@
-﻿using BalanceApp.Application.Repositories;
-using BalanceApp.Infrastructure.Datas.Contexts;
+﻿using BalanceApp.Application.Datas;
+using BalanceApp.Application.Repositories;
 using BalanceApp.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
-namespace BalanceApp.Infrastructure.Repositories.implementations
+namespace BalanceApp.Infrastructure.Repositories
 {
     public abstract class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class
@@ -34,18 +34,21 @@ namespace BalanceApp.Infrastructure.Repositories.implementations
         public async Task<TEntity> Create(TEntity entity)
         {
             await _context.Set<TEntity>().AddAsync(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
 
-        public TEntity Update(TEntity entity)
+        public async Task<TEntity> Update(TEntity entity)
         {
             _context.Set<TEntity>().Update(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
 
-        public TEntity Delete(TEntity entity)
+        public async Task<TEntity> Delete(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
     }

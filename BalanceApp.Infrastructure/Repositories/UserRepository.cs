@@ -1,8 +1,7 @@
-﻿using BalanceApp.Application.Repositories;
+﻿using BalanceApp.Application.Datas;
+using BalanceApp.Application.Repositories;
 using BalanceApp.Domain.Entities;
-using BalanceApp.Infrastructure.Datas.Contexts;
 using BalanceApp.Infrastructure.Exceptions;
-using BalanceApp.Infrastructure.Repositories.implementations;
 using Microsoft.EntityFrameworkCore;
 
 namespace BalanceApp.Infrastructure.Repositories

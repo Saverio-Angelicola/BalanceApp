@@ -1,7 +1,6 @@
-﻿using BalanceApp.API.Datas;
-using BalanceApp.Application.Datas;
+﻿using BalanceApp.Application.Datas;
 using BalanceApp.Application.Repositories;
-using BalanceApp.Infrastructure.Datas.Contexts;
+using BalanceApp.Infrastructure.Datas;
 using BalanceApp.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +17,6 @@ namespace BalanceApp.Infrastructure
 
             services.AddScoped<IContext, Context>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }
