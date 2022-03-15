@@ -10,13 +10,13 @@ namespace BalanceApp.Application.Services.implementations.Auth
     public class AuthService : IAuthService
     {
         private readonly ITokenService tokenService;
-        private readonly IUserService userService;
+        private readonly IUserFetcherService userFetcherService;
         private readonly IPasswordHasher<User> passwordHasher;
 
-        public AuthService(ITokenService tokenService, IUserService userService, IPasswordHasher<User> passwordHasher)
+        public AuthService(ITokenService tokenService, IUserFetcherService userFetcherService, IPasswordHasher<User> passwordHasher)
         {
             this.tokenService = tokenService;
-            this.userService = userService;
+            this.userFetcherService = userFetcherService;
             this.passwordHasher = passwordHasher;
         }
 
@@ -24,7 +24,7 @@ namespace BalanceApp.Application.Services.implementations.Auth
         {
             try
             {
-                User user = await userService.GetUserByEmail(loginUser.Email);
+                User user = await userFetcherService.GetUserByEmail(loginUser.Email);
                 PasswordVerificationResult isPasswordValid = passwordHasher.VerifyHashedPassword(user, user.UserPassword, loginUser.Password);
 
                 if (isPasswordValid != PasswordVerificationResult.Success)
