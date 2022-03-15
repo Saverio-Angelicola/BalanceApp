@@ -9,15 +9,17 @@ namespace BalanceApp.UI.UnitTests.Controllers
 {
     public class UserControllerTests
     {
-        private readonly Mock<IUserService> userServiceStub;
+        private readonly Mock<IUserUpdaterService> userUpdaterServiceStub;
+        private readonly Mock<IUserDeletionService> userDeletionServiceStub;
         private readonly Mock<ITokenService> tokenServiceStub;
         private readonly UserController controller;
 
         public UserControllerTests()
         {
-            userServiceStub = new();
+            userUpdaterServiceStub = new();
             tokenServiceStub = new();
-            controller = new(userServiceStub.Object, tokenServiceStub.Object);
+            userDeletionServiceStub = new();
+            controller = new(userUpdaterServiceStub.Object, tokenServiceStub.Object, userDeletionServiceStub.Object);
         }
 
         /*  [Fact]
