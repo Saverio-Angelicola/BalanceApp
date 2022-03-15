@@ -10,13 +10,15 @@ namespace BalanceApp.UI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService userService;
+        private readonly IUserUpdaterService userUpdaterService;
         private readonly ITokenService tokenService;
+        private readonly IUserDeletionService userDeletionService;
 
-        public UserController(IUserService userService, ITokenService tokenService)
+        public UserController(IUserUpdaterService userUpdaterService, ITokenService tokenService, IUserDeletionService userDeletionService)
         {
-            this.userService = userService;
+            this.userUpdaterService = userUpdaterService;
             this.tokenService = tokenService;
+            this.userDeletionService = userDeletionService;
         }
 
         [HttpDelete("delete"), Authorize]
@@ -26,7 +28,7 @@ namespace BalanceApp.UI.Controllers
             {
                 string bearerToken = HttpContext.Request.Headers.Authorization;
                 string username = tokenService.GetEmailFromJwtToken(bearerToken);
-                return Ok(await userService.DeleteUser(username));
+                return Ok(await userDeletionService.DeleteUser(username));
             }
             catch (Exception ex)
             {
@@ -42,7 +44,7 @@ namespace BalanceApp.UI.Controllers
             {
                 string bearerToken = HttpContext.Request.Headers.Authorization;
                 string username = tokenService.GetEmailFromJwtToken(bearerToken);
-                return Ok(await userService.UpdateUser(username, updateUser));
+                return Ok(await userUpdaterService.UpdateUser(username, updateUser));
             }
             catch (Exception ex)
             {
@@ -57,7 +59,7 @@ namespace BalanceApp.UI.Controllers
             {
                 string bearerToken = HttpContext.Request.Headers.Authorization;
                 string username = tokenService.GetEmailFromJwtToken(bearerToken);
-                return Ok(await userService.UpdatePassword(username, updatePassword));
+                return Ok(await userUpdaterService.UpdatePassword(username, updatePassword));
             }
             catch (Exception ex)
             {

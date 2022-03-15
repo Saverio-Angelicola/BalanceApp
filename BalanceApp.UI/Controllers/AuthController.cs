@@ -11,15 +11,17 @@ namespace BalanceApp.UI.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IUserService userService;
+        private readonly IUserRegistrationService userRegistrationService;
+        private readonly IUserFetcherService userFetcherService;
         private readonly IAuthService authService;
         private readonly ITokenService tokenService;
 
-        public AuthController(IUserService userService, IAuthService authService, ITokenService tokenService)
+        public AuthController(IUserRegistrationService userRegistrationService, IAuthService authService, ITokenService tokenService, IUserFetcherService userFetcherService)
         {
-            this.userService = userService;
+            this.userRegistrationService = userRegistrationService;
             this.authService = authService;
             this.tokenService = tokenService;
+            this.userFetcherService = userFetcherService;
         }
 
         [HttpPost("register")]
@@ -27,7 +29,7 @@ namespace BalanceApp.UI.Controllers
         {
             try
             {
-                return Ok(await userService.CreateUser(registerDto));
+                return Ok(await userRegistrationService.RegisterUser(registerDto));
             }
             catch (Exception ex)
             {
@@ -56,7 +58,7 @@ namespace BalanceApp.UI.Controllers
             {
                 string bearerToken = HttpContext.Request.Headers.Authorization;
                 string email = tokenService.GetEmailFromJwtToken(bearerToken);
-                return Ok(await userService.GetUserByEmail(email));
+                return Ok(await userFetcherService.GetUserByEmail(email));
             }
             catch (Exception ex)
             {
