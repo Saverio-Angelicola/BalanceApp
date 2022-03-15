@@ -15,16 +15,18 @@ namespace BalanceApp.UI.UnitTests.Controllers
 {
     public class AuthControllerTests
     {
-        private readonly Mock<IUserService> userServiceStub;
+        private readonly Mock<IUserRegistrationService> userRegistrationServiceStub;
+        private readonly Mock<IUserFetcherService> userFetcherServiceStub;
         private readonly Mock<IAuthService> authServiceStub;
         private readonly Mock<ITokenService> tokenServiceStub;
         private readonly AuthController authController;
         public AuthControllerTests()
         {
-            userServiceStub = new();
+            userRegistrationServiceStub = new();
             authServiceStub = new();
             tokenServiceStub = new();
-            authController = new(userServiceStub.Object, authServiceStub.Object, tokenServiceStub.Object);
+            userFetcherServiceStub = new();
+            authController = new(userRegistrationServiceStub.Object, authServiceStub.Object, tokenServiceStub.Object, userFetcherServiceStub.Object);
         }
 
         [Fact]
@@ -32,7 +34,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         {
             //Arrange
             User expected = CreateRandomUser();
-            userServiceStub.Setup(service => service.CreateUser(It.IsAny<CreateUserDto>())).ReturnsAsync(expected);
+            userRegistrationServiceStub.Setup(service => service.RegisterUser(It.IsAny<CreateUserDto>())).ReturnsAsync(expected);
             //Act
             var result = await authController.Register(It.IsAny<CreateUserDto>()) as OkObjectResult;
             //Assert
@@ -44,7 +46,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         {
             //Arrange
             User expected = CreateRandomUser();
-            userServiceStub.Setup(service => service.CreateUser(It.IsAny<CreateUserDto>())).ReturnsAsync(expected);
+            userRegistrationServiceStub.Setup(service => service.RegisterUser(It.IsAny<CreateUserDto>())).ReturnsAsync(expected);
             //Act
             var result = await authController.Register(It.IsAny<CreateUserDto>()) as OkObjectResult;
             //Assert
@@ -55,7 +57,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         public async Task Register_WithException_ReturnsBadRequest()
         {
             //Arrange
-            userServiceStub.Setup(service => service.CreateUser(It.IsAny<CreateUserDto>())).Throws(new Exception());
+            userRegistrationServiceStub.Setup(service => service.RegisterUser(It.IsAny<CreateUserDto>())).Throws(new Exception());
             //Act
             var result = await authController.Register(It.IsAny<CreateUserDto>());
             //Assert
@@ -102,7 +104,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         {
             //Arrange
             User expected = CreateRandomUser();
-            userServiceStub.Setup(service => service.GetUserByEmail(It.IsAny<string>())).ReturnsAsync(expected);
+            userFetcherServiceStub.Setup(service => service.GetUserByEmail(It.IsAny<string>())).ReturnsAsync(expected);
             //Act
             var result = await authController.GetProfile() as OkObjectResult;
             //Assert
@@ -114,7 +116,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         {
             //Arrange
             User expected = CreateRandomUser();
-            userServiceStub.Setup(service => service.GetUserByEmail(It.IsAny<string>())).ReturnsAsync(expected);
+            userFetcherServiceStub.Setup(service => service.GetUserByEmail(It.IsAny<string>())).ReturnsAsync(expected);
             //Act
             var result = await authController.GetProfile() as OkObjectResult;
             //Assert
@@ -125,7 +127,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         public async Task GetProfile_WithException_ReturnsBadRequest()
         {
             //Arrange
-            userServiceStub.Setup(service => service.GetUserByEmail(It.IsAny<string>())).Throws(new Exception());
+            userFetcherServiceStub.Setup(service => service.GetUserByEmail(It.IsAny<string>())).Throws(new Exception());
             //Act
             var result = await authController.GetProfile();
             //Assert
