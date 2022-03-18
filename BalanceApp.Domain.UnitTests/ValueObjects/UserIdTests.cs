@@ -14,7 +14,7 @@ namespace BalanceApp.Domain.UnitTests.ValueObjects
             //Arrange
             Guid expected = Guid.NewGuid();
             //Act
-            UserId userId = new UserId(expected);
+            UserId userId = new(expected);
             //Assert
             userId.Value.Should().Be(expected);
 
