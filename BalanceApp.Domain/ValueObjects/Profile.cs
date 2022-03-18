@@ -8,16 +8,16 @@ namespace BalanceApp.Domain.ValueObjects
         public double Height { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public string Gender { get; set; }
+        public int Gender { get; set; }
 
         public readonly List<BodyData> BodyDatas;
         public BirthDate BirthDate { get; private set; }
 
-        public Profile(Guid id, string firstname, string lastname, string gender, string birthdate, double height)
+        public Profile(Guid id, string firstname, string lastname, int gender, string birthdate, double height)
         {
-            if (gender != "M" || gender != "F")
+            if (gender > 1 || gender < 0)
             {
-                throw new BadGenderException();
+                throw new BadGenderException(gender);
             }
 
             if (height <= 0)
@@ -39,7 +39,7 @@ namespace BalanceApp.Domain.ValueObjects
             Firstname = string.Empty;
             Lastname = string.Empty;
             BodyDatas = new();
-            Gender = string.Empty;
+            Gender = 0;
             BirthDate = BirthDate.Create("01/01/2000");
 
         }
