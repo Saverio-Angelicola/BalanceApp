@@ -2,6 +2,6 @@
 {
     public class BadGenderException : Exception
     {
-        public BadGenderException() : base("the chosen gender is not correct. Only 'H' (male) or 'F' (female) values") { }
+        public BadGenderException(int gender) : base($"the value {gender} is not correct. Only '0' (male) or '1' (female) values") { }
     }
 }
