@@ -71,9 +71,11 @@ namespace BalanceApp.Domain.Entities
             {
                 throw new ProfileNotFoundException(id.ToString());
             }
-            Profiles.Remove(profile);
-            Profiles.Add(updatedProfile);
-            
+            profile.Firstname = updatedProfile.Firstname;
+            profile.Lastname = updatedProfile.Lastname;
+            profile.Height = updatedProfile.Height;
+            profile.Gender = updatedProfile.Gender;
+
         }
 
         public void DeleteProfile(Guid id)
