@@ -1,5 +1,6 @@
 ﻿using BalanceApp.Application.Dtos.Auth;
 using BalanceApp.Application.Services.interfaces.Auth;
+using BalanceApp.Application.Services.interfaces.Security;
 using BalanceApp.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -12,9 +13,11 @@ namespace BalanceApp.Application.Services.implementations.Auth
     public class TokenService : ITokenService
     {
         private readonly IConfiguration _configuration;
-        public TokenService(IConfiguration configuration)
+        private readonly IJwtHandler jwtHandler;
+        public TokenService(IConfiguration configuration, IJwtHandler jwtHandler)
         {
             _configuration = configuration;
+            this.jwtHandler = jwtHandler;
         }
         public TokenDto CreateJwtToken(User user)
         {
@@ -30,7 +33,7 @@ namespace BalanceApp.Application.Services.implementations.Auth
 
             JwtSecurityToken token = new(claims: claims, expires: DateTime.Now.AddDays(1), signingCredentials: credentials);
 
-            string jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            string jwt = jwtHandler.WriteToken(token);
             TokenDto tokenDto = new(jwt);
 
             return tokenDto;
@@ -39,8 +42,8 @@ namespace BalanceApp.Application.Services.implementations.Auth
         public string GetEmailFromJwtToken(string bearerToken)
         {
             string token = bearerToken.Remove(0, 7);
-            string username = new JwtSecurityTokenHandler().ReadJwtToken(token).Payload.Claims.ElementAt(0).Value; ;
-            return username;
+            string email = jwtHandler.ReadJwtToken(token).Payload.Claims.ElementAt(0).Value;
+            return email;
         }
     }
 }

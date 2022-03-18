@@ -25,22 +25,22 @@ namespace BalanceApp.Application.Services.implementations.Profiles
             }
             Profile profile = user.GetProfile(ProfileId);
 
-            if(updateProfileDto.Firstname is not null)
+            if (updateProfileDto.Firstname is not null)
             {
                 profile.Firstname = updateProfileDto.Firstname;
             }
 
-            if(updateProfileDto.Lastname is not null)
+            if (updateProfileDto.Lastname is not null)
             {
                 profile.Lastname = updateProfileDto.Lastname;
             }
 
-            if(updateProfileDto.Height is not double.NaN)
+            if (updateProfileDto.Height is not double.NaN)
             {
                 profile.Height = updateProfileDto.Height;
             }
 
-            if(updateProfileDto.Gender is not null)
+            if (updateProfileDto.Gender <= 1 && updateProfileDto.Gender >= 0)
             {
                 profile.Gender = updateProfileDto.Gender;
             }
