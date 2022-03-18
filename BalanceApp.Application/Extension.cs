@@ -1,6 +1,7 @@
 ﻿using BalanceApp.Application.Services.implementations.Auth;
 using BalanceApp.Application.Services.implementations.BodyDatas;
 using BalanceApp.Application.Services.implementations.Profiles;
+using BalanceApp.Application.Services.implementations.Security;
 using BalanceApp.Application.Services.implementations.Users;
 using BalanceApp.Application.Services.interfaces.Auth;
 using BalanceApp.Application.Services.interfaces.BodyDatas;
@@ -29,7 +30,7 @@ namespace BalanceApp.Application
             services.AddScoped<IBodyDataCreatorService, BodyDataCreatorService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IJwtHandler, IJwtHandler>();
+            services.AddScoped<IJwtHandler, JwtHandler>();
 
             return services;
         }
