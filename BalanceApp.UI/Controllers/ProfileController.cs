@@ -19,7 +19,7 @@ namespace BalanceApp.UI.Controllers
         public ProfileController(
             IProfileCreatorService profileCreatorService, IProfileUpdaterService profileUpdaterService,
             IProfileDeletionService profileDeletionService, IProfileFetcherService profileFetcherService,
-            ITokenService tokenService )
+            ITokenService tokenService)
         {
             this.profileCreatorService = profileCreatorService;
             this.profileUpdaterService = profileUpdaterService;
@@ -36,7 +36,7 @@ namespace BalanceApp.UI.Controllers
                 string bearerToken = HttpContext.Request.Headers.Authorization;
                 string email = tokenService.GetEmailFromJwtToken(bearerToken);
                 profileCreatorService.CreateProfile(email, profileDto);
-                return Created("profile",profileDto);
+                return Created("profile", profileDto);
             }
             catch (Exception ex)
             {
@@ -54,14 +54,14 @@ namespace BalanceApp.UI.Controllers
                 string email = tokenService.GetEmailFromJwtToken(bearerToken);
                 return Ok(await profileFetcherService.GetProfile(email, id));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
-            
+
         }
 
-        [HttpPut("profile/{id}"), Authorize]
+        [HttpPatch("profile/{id}"), Authorize]
         public IActionResult UpdateProfile([FromRoute(Name = "id")] Guid id, UpdateProfileDto profileDto)
         {
             try
@@ -71,7 +71,7 @@ namespace BalanceApp.UI.Controllers
                 profileUpdaterService.UpdateProfile(email, id, profileDto);
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -87,7 +87,7 @@ namespace BalanceApp.UI.Controllers
                 profileDeletionService.DeleteProfile(email, id);
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
