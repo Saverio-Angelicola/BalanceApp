@@ -1,0 +1,7 @@
+.main-a {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+  /*  background: url("../assets/img/AdminBackground.jpg"); */
+    background-size: cover;
+}

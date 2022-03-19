@@ -1,15 +1,22 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import AdminHome from './pages/AdminHome';
-import Login from './pages/Login';
+import React from "react";
+import { BrowserRouter as Router,Routes,Route, } from "react-router-dom"; 
+import Login from "./Pages/Login.js";
+import Register from "./Pages/Register.js";
+import AdminUserList from "./Pages/AdminUserList.js";
+import "./App.css"
 
-const App = ()=>  {
-    return (
-     <Routes>
-         <Route index path='/' element={<Login/>} />
-         <Route path='/admin' element={<AdminHome/>} />
-     </Routes>
-    );
+export default function App() 
+{
+  
+  return(
+
+      <Routes>
+        <Route path="/" element={<Login />}/>
+        <Route path="register" element={<Register />}/>
+        <Route path="admin" element={<AdminUserList/>}/>
+      </Routes>
+     
+  ); 
 }
 
-export default App;
+
