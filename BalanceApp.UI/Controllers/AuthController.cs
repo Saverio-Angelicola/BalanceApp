@@ -16,7 +16,11 @@ namespace BalanceApp.UI.Controllers
         private readonly IAuthService authService;
         private readonly ITokenService tokenService;
 
-        public AuthController(IUserRegistrationService userRegistrationService, IAuthService authService, ITokenService tokenService, IUserFetcherService userFetcherService)
+        public AuthController(IUserRegistrationService userRegistrationService, 
+                IAuthService authService, 
+                ITokenService tokenService, 
+                IUserFetcherService userFetcherService
+            )
         {
             this.userRegistrationService = userRegistrationService;
             this.authService = authService;
