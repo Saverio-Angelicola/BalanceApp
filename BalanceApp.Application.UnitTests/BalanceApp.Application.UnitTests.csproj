@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Users\" />
     <Folder Include="Profiles\" />
   </ItemGroup>
 
