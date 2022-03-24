@@ -6,6 +6,10 @@ using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Moq;
 using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using Xunit;
 
 namespace BalanceApp.Application.UnitTests.Auth
@@ -40,9 +44,14 @@ namespace BalanceApp.Application.UnitTests.Auth
         {
             //Arrange
             User fakeUser = CreateRandomUser();
-            string bearerToken = $"bearer {tokenService.CreateJwtToken(fakeUser).TokenJwt}";
+            string fakeJwt = "jsonwebtoken";
+            List<Claim> fakeClaims = new()
+            {
+                new Claim(ClaimTypes.Email, fakeUser.Email)
+            };
+            jwtHandlerStub.Setup(service => service.ReadJwtToken(It.IsAny<string>())).Returns(new JwtSecurityToken(claims: fakeClaims));
             //Act
-            var result = tokenService.GetEmailFromJwtToken(bearerToken);
+            var result = tokenService.GetEmailFromJwtToken(fakeJwt);
             //Assert
             result.Should().Be(fakeUser.Email);
         }
