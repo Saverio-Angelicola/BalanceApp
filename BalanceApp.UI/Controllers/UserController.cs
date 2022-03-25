@@ -37,7 +37,7 @@ namespace BalanceApp.UI.Controllers
 
         }
 
-        [HttpPatch("user/infos/update"), Authorize]
+        [HttpPatch("infos/update"), Authorize]
         public async Task<IActionResult> UpdateUser(UpdateUserDto updateUser)
         {
             try
@@ -52,7 +52,7 @@ namespace BalanceApp.UI.Controllers
             }
         }
 
-        [HttpPatch("user/password/update"), Authorize]
+        [HttpPatch("password/update"), Authorize]
         public async Task<IActionResult> UpdatePassword(UpdateUserPasswordDto updatePassword)
         {
             try
