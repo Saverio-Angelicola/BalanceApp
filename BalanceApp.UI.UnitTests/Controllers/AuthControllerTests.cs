@@ -68,7 +68,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         public async Task Login_WithCorrectUser_ReturnsOk()
         {
             //Arrange
-            TokenDto expected = CreateRandomTokenDto();
+            string expected = "jsonWebToken";
             authServiceStub.Setup(service => service.Login(It.IsAny<LoginDto>())).ReturnsAsync(expected);
             //Act
             var result = await authController.Login(It.IsAny<LoginDto>());
@@ -80,12 +80,12 @@ namespace BalanceApp.UI.UnitTests.Controllers
         public async Task Login_WithCorrectUser_ReturnsTokenDto()
         {
             //Arrange
-            TokenDto expected = CreateRandomTokenDto();
+            string expected = "jsonWebToken";
             authServiceStub.Setup(service => service.Login(It.IsAny<LoginDto>())).ReturnsAsync(expected);
             //Act
             var result = await authController.Login(It.IsAny<LoginDto>()) as OkObjectResult;
             //Assert
-            result?.Value.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<TokenDto>());
+            result?.Value.Should().Be(expected);
         }
 
         [Fact]
@@ -137,12 +137,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         internal static User CreateRandomUser()
         {
             Guid guid = Guid.NewGuid();
-            return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString());
-        }
-
-        internal static TokenDto CreateRandomTokenDto()
-        {
-            return new(Guid.NewGuid().ToString());
+            return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString(), "1/1/2000", DateTime.UtcNow);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         internal static User CreateRandomUser()
         {
             Guid guid = Guid.NewGuid();
-            return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString());
+            return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString(), "1/1/2000", DateTime.UtcNow);
         }
     }
 }
