@@ -1,6 +1,7 @@
-﻿using BalanceApp.Application.Datas;
-using BalanceApp.Application.Repositories;
+﻿using BalanceApp.Application.Repositories;
+using BalanceApp.Application.Services.Providers;
 using BalanceApp.Infrastructure.Datas;
+using BalanceApp.Infrastructure.Providers;
 using BalanceApp.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +18,7 @@ namespace BalanceApp.Infrastructure
 
             services.AddScoped<IContext, Context>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IDateTimeProvider, DateTimeProvider>();
             return services;
         }
     }
