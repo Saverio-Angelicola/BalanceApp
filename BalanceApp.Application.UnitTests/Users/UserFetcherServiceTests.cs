@@ -25,7 +25,7 @@ namespace BalanceApp.Application.UnitTests.Users
         public async Task GetAllUser_WithUserList_ReturnsUserList()
         {
             //Arrange
-            List<User> expected = new List<User>()
+            List<User> expected = new()
             {
                 CreateRandomUser(),
                 CreateRandomUser()
@@ -65,7 +65,7 @@ namespace BalanceApp.Application.UnitTests.Users
         internal static User CreateRandomUser()
         {
             Guid guid = Guid.NewGuid();
-            return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString());
+            return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString(), "1/1/2000", DateTime.UtcNow);
         }
     }
 }

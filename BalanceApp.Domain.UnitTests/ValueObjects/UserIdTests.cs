@@ -14,7 +14,7 @@ namespace BalanceApp.Domain.UnitTests.ValueObjects
             //Arrange
             Guid expected = Guid.NewGuid();
             //Act
-            UserId userId = new(expected);
+            EntityId userId = new(expected);
             //Assert
             userId.Value.Should().Be(expected);
 
@@ -23,7 +23,7 @@ namespace BalanceApp.Domain.UnitTests.ValueObjects
         [Fact]
         public void UserId_WithEmptyGuid_ThrowsException()
         {
-            Assert.Throws<EmptyUserIdException>(() => new UserId(Guid.Empty));
+            Assert.Throws<EmptyEntityIdException>(() => new EntityId(Guid.Empty));
         }
     }
 }

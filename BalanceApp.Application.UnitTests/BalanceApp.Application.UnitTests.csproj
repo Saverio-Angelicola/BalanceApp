@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Profiles\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BalanceApp.Application\BalanceApp.Application.csproj" />
   </ItemGroup>
 
