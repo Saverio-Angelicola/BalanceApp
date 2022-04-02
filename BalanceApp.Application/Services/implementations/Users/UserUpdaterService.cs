@@ -46,8 +46,7 @@ namespace BalanceApp.Application.Services.implementations.Users
                 user.Lastname = updatedUser.LastName;
             }
 
-            await userRepository.Update(user);
-            return user;
+            return await userRepository.Update(user);
         }
     }
 }
