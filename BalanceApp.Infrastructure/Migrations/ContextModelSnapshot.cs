@@ -27,6 +27,10 @@ namespace BalanceApp.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("BirthDate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -48,6 +52,9 @@ namespace BalanceApp.Infrastructure.Migrations
 
                     b.Property<string>("UserPassword")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("birthdate")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -82,7 +89,7 @@ namespace BalanceApp.Infrastructure.Migrations
                     b.Property<double>("MuscleRate")
                         .HasColumnType("double precision");
 
-                    b.Property<Guid?>("ProfileId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uuid");
 
                     b.Property<double>("WaterRate")
@@ -93,70 +100,21 @@ namespace BalanceApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProfileId");
-
-                    b.ToTable("bodyDatas", (string)null);
-                });
-
-            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.Profile", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("BirthDate")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Firstname")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("integer");
-
-                    b.Property<double>("Height")
-                        .HasColumnType("double precision");
-
-                    b.Property<string>("Lastname")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("birthdate")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
                     b.HasIndex("UserId");
 
-                    b.ToTable("profiles", (string)null);
+                    b.ToTable("bodyData", (string)null);
                 });
 
             modelBuilder.Entity("BalanceApp.Domain.ValueObjects.BodyData", b =>
                 {
-                    b.HasOne("BalanceApp.Domain.ValueObjects.Profile", null)
-                        .WithMany("BodyDatas")
-                        .HasForeignKey("ProfileId");
-                });
-
-            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.Profile", b =>
-                {
                     b.HasOne("BalanceApp.Domain.Entities.User", null)
-                        .WithMany("Profiles")
+                        .WithMany("BodyDataList")
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("BalanceApp.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Profiles");
-                });
-
-            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.Profile", b =>
-                {
-                    b.Navigation("BodyDatas");
+                    b.Navigation("BodyDataList");
                 });
 #pragma warning restore 612, 618
         }
