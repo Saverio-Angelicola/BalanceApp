@@ -18,7 +18,7 @@ namespace BalanceApp.Domain.ValueObjects
 
         }
 
-        public BodyData(double weight, double height, double fatMassRate, double waterRate, double muscleRate, double boneRate, double heartBeat, double bodyMassIndex)
+        public BodyData(double weight, double height, double fatMassRate, double waterRate, double muscleRate, double boneRate, double heartBeat, double bodyMassIndex, DateTime createdAt)
         {
             if (weight < 0 && height < 0 && fatMassRate < 0 && waterRate < 0 && muscleRate < 0 && boneRate < 0 && heartBeat < 0 && bodyMassIndex < 0)
             {
@@ -31,7 +31,7 @@ namespace BalanceApp.Domain.ValueObjects
             BoneRate = boneRate;
             HeartBeat = heartBeat;
             BodyMassIndex = bodyMassIndex;
-            CreatedAt = DateTime.UtcNow;
+            CreatedAt = createdAt;
         }
     }
 }
