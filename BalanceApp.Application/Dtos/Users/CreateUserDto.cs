@@ -1,4 +1,4 @@
-﻿using BalanceApp.Domain.Exceptions;
+﻿using BalanceApp.Domain.ValueObjects;
 
 namespace BalanceApp.Application.Dtos.Users
 {
@@ -8,17 +8,15 @@ namespace BalanceApp.Application.Dtos.Users
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string BirthDate { get; set; }
 
 
-        public CreateUserDto(string firstName, string lastName, string email, string password)
+        public CreateUserDto(string firstName, string lastName, string email, string password, string birthDate)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
-            if (password.Length < 8)
-            {
-                throw new PasswordSizeException();
-            }
+            BirthDate = birthDate;
             Password = password;
         }
 
@@ -28,6 +26,7 @@ namespace BalanceApp.Application.Dtos.Users
             LastName = string.Empty;
             Email = string.Empty;
             Password = string.Empty;
+            BirthDate = string.Empty;
         }
     }
 }
