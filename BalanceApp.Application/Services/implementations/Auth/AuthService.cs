@@ -20,7 +20,7 @@ namespace BalanceApp.Application.Services.implementations.Auth
             this.passwordHasher = passwordHasher;
         }
 
-        public async Task<TokenDto> Login(LoginDto loginUser)
+        public async Task<string> Login(LoginDto loginUser)
         {
             try
             {
