@@ -38,7 +38,7 @@ const FormLogin = () => {
       const token = await axios.post("https://localhost:7298/api/auth/login",{
         email: email,
         password: password
-      })
+      }).data.TokenJwt;
 
       localStorage.setItem("jwt",token);
       setErrorMessage("");
