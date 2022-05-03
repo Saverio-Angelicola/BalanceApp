@@ -8,11 +8,9 @@
         public double BodyMassIndex { get; set; }
         public double WaterRate { get; set; }
         public double FatMassRate { get; set; }
-        public double Height { get; set; }
-        public int Age { get; set; }
         public double Weight { get; set; }
 
-        public BodyDataDto(double muscleRate, double boneRate, double heartBeat, double bodyMassIndex, double waterRate, double fatMassRate, double height, int age, double weight)
+        public BodyDataDto(double muscleRate, double boneRate, double heartBeat, double bodyMassIndex, double waterRate, double fatMassRate, double weight)
         {
             MuscleRate = muscleRate;
             BoneRate = boneRate;
@@ -20,8 +18,6 @@
             BodyMassIndex = bodyMassIndex;
             WaterRate = waterRate;
             FatMassRate = fatMassRate;
-            Height = height;
-            Age = age;
             Weight = weight;
         }
 
@@ -33,8 +29,6 @@
             BodyMassIndex = 0.0;
             WaterRate = 0.0;
             FatMassRate = 0.0;
-            Height = 0.0;
-            Age = 0;
             Weight = 0.0;
         }
     }
