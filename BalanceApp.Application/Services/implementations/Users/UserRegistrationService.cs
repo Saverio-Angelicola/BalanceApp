@@ -22,9 +22,17 @@ namespace BalanceApp.Application.Services.implementations.Users
 
         public async Task<User> RegisterUser(CreateUserDto createdUser)
         {
-            User user = new(Guid.NewGuid(), createdUser.FirstName, createdUser.LastName, createdUser.Email, createdUser.Password, createdUser.BirthDate, dateTimeProvider.GetUtcNow());
-            user.UpdatePassword(passwordHasher.HashPassword(user, createdUser.Password));
-            return await userRepository.Create(user);
+            try
+            {
+                User user = new(Guid.NewGuid(), createdUser.FirstName, createdUser.LastName, createdUser.Email, createdUser.Password, createdUser.BirthDate, dateTimeProvider.GetUtcNow());
+                user.UpdatePassword(passwordHasher.HashPassword(user, createdUser.Password));
+                user.LastUpdate = dateTimeProvider.GetNow().ToString();
+                return await userRepository.Create(user);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
