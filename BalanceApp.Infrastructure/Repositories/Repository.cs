@@ -1,12 +1,13 @@
-﻿using BalanceApp.Application.Datas;
-using BalanceApp.Application.Repositories;
+﻿using BalanceApp.Application.Repositories;
+using BalanceApp.Domain.Entities;
+using BalanceApp.Infrastructure.Datas;
 using BalanceApp.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BalanceApp.Infrastructure.Repositories
 {
     public abstract class Repository<TEntity> : IRepository<TEntity>
-        where TEntity : class
+        where TEntity : Entity
     {
         private readonly IContext _context;
 

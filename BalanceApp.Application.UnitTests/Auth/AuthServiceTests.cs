@@ -32,16 +32,16 @@ namespace BalanceApp.Application.UnitTests.Auth
         public async Task Login_WithCorrectPassword_ReturnTokenDto()
         {
             //Arrange
-            TokenDto expected = CreateRandomTokenDto();
+            string expected = "jsonwebtoken";
             User fakeUser = CreateRandomUser();
             LoginDto fakeDto = new();
             userFetcherServiceStub.Setup(service => service.GetUserByEmail(It.IsAny<string>())).ReturnsAsync(fakeUser);
             passwordHasherStub.Setup(service => service.VerifyHashedPassword(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>())).Returns(PasswordVerificationResult.Success);
             tokenServiceStub.Setup(service => service.CreateJwtToken(It.IsAny<User>())).Returns(expected);
             //Act
-            TokenDto result = await authService.Login(fakeDto);
+            string result = await authService.Login(fakeDto);
             //Assert
-            result.Should().BeEquivalentTo(expected,options=>options.ComparingByMembers<TokenDto>());
+            result.Should().Be(expected);
         }
 
         [Fact]
@@ -69,13 +69,7 @@ namespace BalanceApp.Application.UnitTests.Auth
         internal static User CreateRandomUser()
         {
             Guid guid = Guid.NewGuid();
-            return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString());
-        }
-
-        internal static TokenDto CreateRandomTokenDto()
-        {
-            Guid guid = Guid.NewGuid();
-            return new(guid.ToString());
+            return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString(), "1/1/2000", DateTime.UtcNow);
         }
     }
 }

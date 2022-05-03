@@ -29,8 +29,7 @@ namespace BalanceApp.Application.Services.implementations.Users
                 throw new PasswordNotValidException();
             }
             user.UpdatePassword(passwordHasher.HashPassword(user, passwordDto.NewPassword));
-            await userRepository.Update(user);
-            return user;
+            return await userRepository.Update(user);
         }
 
         public async Task<User> UpdateUser(string email, UpdateUserDto updatedUser)
@@ -47,8 +46,7 @@ namespace BalanceApp.Application.Services.implementations.Users
                 user.Lastname = updatedUser.LastName;
             }
 
-            await userRepository.Update(user);
-            return user;
+            return await userRepository.Update(user);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace BalanceApp.Application.Services.implementations.Auth
             this.passwordHasher = passwordHasher;
         }
 
-        public async Task<TokenDto> Login(LoginDto loginUser)
+        public async Task<AuthTokenDto> Login(LoginDto loginUser)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace BalanceApp.Application.Services.implementations.Auth
                     throw new PasswordNotValidException();
                 }
 
-                return tokenService.CreateJwtToken(user);
+                return new(tokenService.CreateJwtToken(user));
             }
             catch (Exception)
             {

@@ -1,4 +1,4 @@
-﻿using BalanceApp.Domain.Exceptions;
+﻿ using BalanceApp.Domain.Exceptions;
 
 namespace BalanceApp.Domain.ValueObjects
 {
@@ -13,9 +13,9 @@ namespace BalanceApp.Domain.ValueObjects
             try
             {
                 string[] birthDateSplit = birthdate.Split("/");
-                int days = Convert.ToInt32(birthDateSplit.FirstOrDefault());
+                int days = Convert.ToInt32(birthDateSplit.First());
                 int months = Convert.ToInt32(birthDateSplit[1]);
-                int years = Convert.ToInt32(birthDateSplit.LastOrDefault());
+                int years = Convert.ToInt32(birthDateSplit.Last());
                 return new(days, months, years);
             }
             catch (Exception)

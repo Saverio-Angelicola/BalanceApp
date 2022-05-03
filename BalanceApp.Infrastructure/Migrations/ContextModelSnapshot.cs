@@ -17,7 +17,7 @@ namespace BalanceApp.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.2")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -27,6 +27,10 @@ namespace BalanceApp.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("BirthDate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -35,7 +39,15 @@ namespace BalanceApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("LastUpdate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RefreshToken")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -58,106 +70,52 @@ namespace BalanceApp.Infrastructure.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.BodyData", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<double>("BodyMassIndex")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("BoneRate")
-                        .HasColumnType("double precision");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<double>("FatMassRate")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("HeartBeat")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("Height")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("MuscleRate")
-                        .HasColumnType("double precision");
-
-                    b.Property<Guid?>("ProfileId")
-                        .HasColumnType("uuid");
-
-                    b.Property<double>("WaterRate")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("double precision");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfileId");
-
-                    b.ToTable("bodyDatas", (string)null);
-                });
-
-            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.Profile", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("BirthDate")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Firstname")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Lastname")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("birthdate")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("profiles", (string)null);
-                });
-
-            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.BodyData", b =>
-                {
-                    b.HasOne("BalanceApp.Domain.ValueObjects.Profile", null)
-                        .WithMany("BodyDatas")
-                        .HasForeignKey("ProfileId");
-                });
-
-            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.Profile", b =>
-                {
-                    b.HasOne("BalanceApp.Domain.Entities.User", null)
-                        .WithMany("Profiles")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("BalanceApp.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Profiles");
-                });
+                    b.OwnsMany("BalanceApp.Domain.ValueObjects.BodyData", "BodyDataList", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uuid");
 
-            modelBuilder.Entity("BalanceApp.Domain.ValueObjects.Profile", b =>
-                {
-                    b.Navigation("BodyDatas");
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("Id"));
+
+                            b1.Property<double>("BodyMassIndex")
+                                .HasColumnType("double precision");
+
+                            b1.Property<double>("BoneRate")
+                                .HasColumnType("double precision");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<double>("FatMassRate")
+                                .HasColumnType("double precision");
+
+                            b1.Property<double>("HeartBeat")
+                                .HasColumnType("double precision");
+
+                            b1.Property<double>("MuscleRate")
+                                .HasColumnType("double precision");
+
+                            b1.Property<double>("WaterRate")
+                                .HasColumnType("double precision");
+
+                            b1.Property<double>("Weight")
+                                .HasColumnType("double precision");
+
+                            b1.HasKey("UserId", "Id");
+
+                            b1.ToTable("BodyData");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("BodyDataList");
                 });
 #pragma warning restore 612, 618
         }

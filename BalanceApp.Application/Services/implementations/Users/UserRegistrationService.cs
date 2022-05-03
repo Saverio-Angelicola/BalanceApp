@@ -1,6 +1,7 @@
 ﻿using BalanceApp.Application.Dtos.Users;
 using BalanceApp.Application.Repositories;
 using BalanceApp.Application.Services.interfaces.Users;
+using BalanceApp.Application.Services.Providers;
 using BalanceApp.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 
@@ -10,19 +11,28 @@ namespace BalanceApp.Application.Services.implementations.Users
     {
         private readonly IUserRepository userRepository;
         private readonly IPasswordHasher<User> passwordHasher;
+        private readonly IDateTimeProvider dateTimeProvider;
 
-        public UserRegistrationService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher)
+        public UserRegistrationService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher, IDateTimeProvider dateTimeProvider)
         {
             this.userRepository = userRepository;
             this.passwordHasher = passwordHasher;
+            this.dateTimeProvider = dateTimeProvider;
         }
 
         public async Task<User> RegisterUser(CreateUserDto createdUser)
         {
-            User user = new(Guid.NewGuid(), createdUser.FirstName, createdUser.LastName, createdUser.Email, createdUser.Password);
-            user.UpdatePassword(passwordHasher.HashPassword(user, createdUser.Password));
-            await userRepository.Create(user);
-            return user;
+            try
+            {
+                User user = new(Guid.NewGuid(), createdUser.FirstName, createdUser.LastName, createdUser.Email, createdUser.Password, createdUser.BirthDate, dateTimeProvider.GetUtcNow());
+                user.UpdatePassword(passwordHasher.HashPassword(user, createdUser.Password));
+                user.LastUpdate = dateTimeProvider.GetNow().ToString();
+                return await userRepository.Create(user);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

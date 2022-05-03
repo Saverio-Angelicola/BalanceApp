@@ -19,7 +19,7 @@ namespace BalanceApp.Application.Services.implementations.Auth
             _configuration = configuration;
             this.jwtHandler = jwtHandler;
         }
-        public TokenDto CreateJwtToken(User user)
+        public string CreateJwtToken(User user)
         {
             List<Claim> claims = new()
             {
@@ -34,9 +34,8 @@ namespace BalanceApp.Application.Services.implementations.Auth
             JwtSecurityToken token = new(claims: claims, expires: DateTime.Now.AddDays(1), signingCredentials: credentials);
 
             string jwt = jwtHandler.WriteToken(token);
-            TokenDto tokenDto = new(jwt);
 
-            return tokenDto;
+            return jwt;
         }
 
         public string GetEmailFromJwtToken(string bearerToken)
