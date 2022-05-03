@@ -1,6 +1,8 @@
-﻿using BalanceApp.Application.Repositories;
+﻿using BalanceApp.Application.Providers;
+using BalanceApp.Application.Repositories;
 using BalanceApp.Application.Services.Providers;
 using BalanceApp.Infrastructure.Datas;
+using BalanceApp.Infrastructure.Http;
 using BalanceApp.Infrastructure.Providers;
 using BalanceApp.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,8 @@ namespace BalanceApp.Infrastructure
             services.AddScoped<IContext, Context>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IDateTimeProvider, DateTimeProvider>();
+            services.AddScoped<IWithingsProvider, WithingsProvider>();
+            services.AddScoped<IHttpClient, Client>();
             return services;
         }
     }
