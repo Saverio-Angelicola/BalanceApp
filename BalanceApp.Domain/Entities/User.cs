@@ -13,9 +13,15 @@ namespace BalanceApp.Domain.Entities
         public readonly List<BodyData> BodyDataList;
         public BirthDate BirthDate { get; set; }
         public string Role { get; private set; }
+        public string RefreshToken { get; set; }
+
+        public string LastUpdate { get; set; }
         public DateTime RegisterDate { get; private set; }
 
-        public User() : base(Guid.NewGuid()) {}
+        public User() : base(Guid.NewGuid()) 
+        {
+            BodyDataList = new();
+        }
         public User(Guid id, string firstname, string lastname, string email, string password, string birthDate,DateTime registerDate, string role = "User") : base(id)
         {
             Email = email;
@@ -26,6 +32,7 @@ namespace BalanceApp.Domain.Entities
             RegisterDate = registerDate;
             BirthDate = BirthDate.Create(birthDate);
             Role = role;
+            RefreshToken = "";
         }
 
         public void UpdatePassword(string password)
@@ -47,20 +54,6 @@ namespace BalanceApp.Domain.Entities
                 'U' => "User",
                 _ => "User",
             };
-        }
-
-        public void AddBodyData(BodyData bodyData)
-        {
-            BodyDataList.Add(bodyData);
-        }
-
-        public void AddBodyDatas(List<BodyData> bodyDatas)
-        {
-
-            foreach (BodyData bodyData in bodyDatas)
-            {
-                AddBodyData(bodyData);
-            }
         }
     }
 }
