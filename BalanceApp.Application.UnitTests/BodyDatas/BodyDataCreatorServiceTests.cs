@@ -50,7 +50,7 @@ namespace BalanceApp.Application.UnitTests.BodyDatas
         internal static BodyDataDto CreateRandomBodyDataDto()
         {
             Random random = new();
-            return new(random.NextDouble(), random.NextDouble(), random.NextDouble(), random.NextDouble(), random.NextDouble(), random.NextDouble(), random.NextDouble(), random.Next(), random.NextDouble());
+            return new(random.NextDouble(), random.NextDouble(), random.NextDouble(), random.NextDouble(), random.NextDouble(), random.Next(), random.NextDouble());
         }
 
         internal static User CreateRandomUser()
