@@ -4,9 +4,9 @@ namespace BalanceApp.Domain.ValueObjects
 {
     public record BirthDate(int days, int months, int years)
     {
-        public int Days { get; private set; }
-        public int Months { get; private set; }
-        public int Years { get; private set; }
+        public int Days { get; }
+        public int Months { get; }
+        public int Years { get; }
 
         public static BirthDate Create(string birthdate)
         {
