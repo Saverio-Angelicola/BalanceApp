@@ -24,10 +24,11 @@ namespace BalanceApp.Application.Services.implementations.BodyDatas
             try
             {
                 User user = await userRepository.FindByEmail(userEmail);
-                BodyData bodyData = new(bodyDataDto.Weight, bodyDataDto.Height, bodyDataDto.FatMassRate, bodyDataDto.WaterRate, bodyDataDto.MuscleRate, bodyDataDto.BoneRate, bodyDataDto.HeartBeat, bodyDataDto.BodyMassIndex, dateTimeProvider.GetUtcNow());
-                user.AddBodyData(bodyData);
+                BodyData bodyData = new(bodyDataDto.Weight, bodyDataDto.FatMassRate, bodyDataDto.WaterRate, bodyDataDto.MuscleRate, bodyDataDto.BoneRate, bodyDataDto.HeartBeat, bodyDataDto.BodyMassIndex,dateTimeProvider.GetUtcNow());
+                user.BodyDataList.Add(bodyData);
+                await userRepository.Update(user);
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 throw new AddingBodyDataException();
             }
