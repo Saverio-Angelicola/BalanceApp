@@ -13,17 +13,8 @@ namespace BalanceApp.Domain.ValueObjects
         public double BodyMassIndex { get; }
         public DateTime CreatedAt { get; }
 
-        public BodyData()
+        public BodyData(double weight, double fatMassRate, double waterRate, double muscleRate, double boneRate, double heartBeat, double bodyMassIndex, DateTime createdAt)
         {
-
-        }
-
-        public BodyData(double weight, double height, double fatMassRate, double waterRate, double muscleRate, double boneRate, double heartBeat, double bodyMassIndex, DateTime createdAt)
-        {
-            if (weight < 0 && height < 0 && fatMassRate < 0 && waterRate < 0 && muscleRate < 0 && boneRate < 0 && heartBeat < 0 && bodyMassIndex < 0)
-            {
-                throw new BodyDataPositiveValueException();
-            }
             Weight = weight;
             FatMassRate = fatMassRate;
             WaterRate = waterRate;
