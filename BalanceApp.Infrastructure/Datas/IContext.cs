@@ -1,5 +1,4 @@
 ﻿using BalanceApp.Domain.Entities;
-using BalanceApp.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace BalanceApp.Infrastructure.Datas

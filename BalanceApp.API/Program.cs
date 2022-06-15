@@ -1,11 +1,13 @@
 using BalanceApp.Application;
 using BalanceApp.Infrastructure;
+using BalanceApp.Infrastructure.Datas;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var port = Convert.ToInt32(Environment.GetEnvironmentVariable("PORT"));
 // Add services to the container.
 
 string defaultCors = "origins";
@@ -16,7 +18,12 @@ builder.Services.AddCors(options =>
                           {
                               builder.WithOrigins("http://localhost:3000")
                                                   .AllowAnyHeader()
-                                                  .AllowAnyMethod();
+                                                  .AllowAnyMethod()
+                                                  .AllowAnyOrigin();
+                              builder.WithOrigins("https://balanceappclient.pages.dev")
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyMethod()
+                                                  .AllowAnyOrigin();
                           });
 });
 
@@ -36,7 +43,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateLifetime = true,
     };
 });
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,11 +51,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    var scope = app.Services.CreateScope();
+    var dataContext = scope.ServiceProvider.GetRequiredService<Context>();
+    dataContext.Database.Migrate();
+    app.UseHsts();
+}
 
-app.UseHttpsRedirection();
+app.UseRouting();
 app.UseCors(defaultCors);
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.Run();

@@ -17,9 +17,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceApp.Application.Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceApp.Domain.UnitTests", "BalanceApp.Domain.UnitTests\BalanceApp.Domain.UnitTests.csproj", "{842CD5BA-CB06-4A0C-9E48-C6150D763730}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceApp.API", "BalanceApp.API\BalanceApp.API.csproj", "{8C0C81EC-CE1F-42CF-90FB-BE6D0E12C3EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceApp.API", "BalanceApp.API\BalanceApp.API.csproj", "{8C0C81EC-CE1F-42CF-90FB-BE6D0E12C3EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceApp.API.UnitTests", "BalanceApp.API.UnitTests\BalanceApp.API.UnitTests.csproj", "{D8A55B64-1D43-4D24-8AF6-2F5B3447DEAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceApp.API.UnitTests", "BalanceApp.API.UnitTests\BalanceApp.API.UnitTests.csproj", "{D8A55B64-1D43-4D24-8AF6-2F5B3447DEAF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B48344E1-02AA-4495-B147-2AFE7C9B9024}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

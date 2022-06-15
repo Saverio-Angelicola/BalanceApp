@@ -24,7 +24,7 @@ namespace BalanceApp.API.Controllers
             this.userFetcherService = userFetcherService;
         }
 
-        [HttpGet,Authorize(Roles = "Admin,Doctor")]
+        [HttpGet, Authorize(Roles = "Admin,Doctor")]
         public async Task<IActionResult> GetUsers()
         {
             try
@@ -34,7 +34,7 @@ namespace BalanceApp.API.Controllers
                 users.ForEach(u => userDtos.Add(new UserDto(u)));
                 return Ok(userDtos);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

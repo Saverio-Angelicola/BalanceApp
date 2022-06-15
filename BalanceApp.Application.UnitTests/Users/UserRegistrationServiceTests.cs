@@ -1,4 +1,5 @@
 ﻿using BalanceApp.Application.Dtos.Users;
+using BalanceApp.Application.Providers;
 using BalanceApp.Application.Repositories;
 using BalanceApp.Application.Services.implementations.Users;
 using BalanceApp.Application.Services.Providers;
@@ -17,6 +18,7 @@ namespace BalanceApp.Application.UnitTests.Users
         private readonly Mock<IUserRepository> repository;
         private readonly Mock<IPasswordHasher<User>> hasher;
         private readonly Mock<IDateTimeProvider> dateStub;
+        private readonly Mock<IWithingsProvider> providerStub;
         private readonly UserRegistrationService service;
 
         public UserRegistrationServiceTests()
@@ -24,7 +26,8 @@ namespace BalanceApp.Application.UnitTests.Users
             repository = new();
             hasher = new();
             dateStub = new();
-            service = new UserRegistrationService(repository.Object, hasher.Object,dateStub.Object);
+            providerStub = new();
+            service = new UserRegistrationService(repository.Object, hasher.Object, dateStub.Object,providerStub.Object);
         }
 
         [Fact]
@@ -32,9 +35,9 @@ namespace BalanceApp.Application.UnitTests.Users
         {
             //Arrange
             var expected = CreateRandomUser();
-            var fakeDto = new CreateUserDto(expected.Firstname,expected.Lastname,expected.Email,expected.UserPassword, "1/1/2000");
-            repository.Setup(repo=>repo.Create(It.IsAny<User>())).ReturnsAsync(expected);
-            hasher.Setup(service=>service.HashPassword(It.IsAny<User>(), It.IsAny<string>())).Returns(expected.UserPassword);
+            var fakeDto = new CreateUserDto(expected.Firstname, expected.Lastname, expected.Email, expected.UserPassword, "1/1/2000");
+            repository.Setup(repo => repo.Create(It.IsAny<User>())).ReturnsAsync(expected);
+            hasher.Setup(service => service.HashPassword(It.IsAny<User>(), It.IsAny<string>())).Returns(expected.UserPassword);
             //Act
             var result = await service.RegisterUser(fakeDto);
             //Assert

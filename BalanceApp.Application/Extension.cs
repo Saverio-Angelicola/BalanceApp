@@ -21,7 +21,6 @@ namespace BalanceApp.Application
             services.AddScoped<IUserRegistrationService, UserRegistrationService>();
             services.AddScoped<IUserFetcherService, UserFetcherService>();
             services.AddScoped<IUserDeletionService, UserDeletionService>();
-            services.AddScoped<IBodyDataCreatorService, BodyDataCreatorService>();
             services.AddScoped<IBodyDataFetcherService, BodyDataFetcherService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAuthService, AuthService>();

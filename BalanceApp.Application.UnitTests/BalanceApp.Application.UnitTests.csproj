@@ -26,4 +26,8 @@
     <ProjectReference Include="..\BalanceApp.Application\BalanceApp.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BodyDatas\" />
+  </ItemGroup>
+
 </Project>

@@ -1,16 +1,13 @@
 ﻿using BalanceApp.Application.Dtos.Auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BalanceApp.Domain.ValueObjects;
 
 namespace BalanceApp.Application.Providers
 {
     public interface IWithingsProvider
     {
-        string CreateSignature(string action);
-        Task<string> GetNonce(string signature);
         Task<WithingsTokenDto> Login(string code);
+        Task<WithingsTokenDto> RefreshToken(string token);
+        Task<List<BodyData>> GetMeasures(string withingsToken, string startDate,double height);
+
     }
 }

@@ -1,6 +1,4 @@
-﻿using BalanceApp.Domain.Exceptions;
-
-namespace BalanceApp.Domain.ValueObjects
+﻿namespace BalanceApp.Domain.ValueObjects
 {
     public record BodyData
     {
@@ -9,18 +7,27 @@ namespace BalanceApp.Domain.ValueObjects
         public double WaterRate { get; }
         public double MuscleRate { get; }
         public double BoneRate { get; }
-        public double HeartBeat { get; }
         public double BodyMassIndex { get; }
-        public DateTime CreatedAt { get; }
+        public string CreatedAt { get; }
 
-        public BodyData(double weight, double fatMassRate, double waterRate, double muscleRate, double boneRate, double heartBeat, double bodyMassIndex, DateTime createdAt)
+        public BodyData()
+        {
+            Weight = 0;
+            FatMassRate = 0;
+            WaterRate = 0;
+            MuscleRate = 0;
+            BoneRate = 0;
+            BodyMassIndex = 0;
+            CreatedAt = string.Empty;
+        }
+
+        public BodyData(double weight, double fatMassRate, double waterRate, double muscleRate, double boneRate, double bodyMassIndex, string createdAt)
         {
             Weight = weight;
             FatMassRate = fatMassRate;
             WaterRate = waterRate;
             MuscleRate = muscleRate;
             BoneRate = boneRate;
-            HeartBeat = heartBeat;
             BodyMassIndex = bodyMassIndex;
             CreatedAt = createdAt;
         }

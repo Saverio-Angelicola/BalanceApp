@@ -1,5 +1,7 @@
 ﻿using BalanceApp.Application.Dtos.Auth;
 using BalanceApp.Application.Exceptions;
+using BalanceApp.Application.Providers;
+using BalanceApp.Application.Repositories;
 using BalanceApp.Application.Services.implementations.Auth;
 using BalanceApp.Application.Services.interfaces.Auth;
 using BalanceApp.Application.Services.interfaces.Users;
@@ -18,6 +20,8 @@ namespace BalanceApp.Application.UnitTests.Auth
         private readonly Mock<ITokenService> tokenServiceStub;
         private readonly Mock<IUserFetcherService> userFetcherServiceStub;
         private readonly Mock<IPasswordHasher<User>> passwordHasherStub;
+        private readonly Mock<IUserRepository> repoStub;
+        private readonly Mock<IWithingsProvider> providerStub;
         private readonly AuthService authService;
 
         public AuthServiceTests()
@@ -25,7 +29,9 @@ namespace BalanceApp.Application.UnitTests.Auth
             tokenServiceStub = new();
             userFetcherServiceStub = new();
             passwordHasherStub = new();
-            authService = new(tokenServiceStub.Object,userFetcherServiceStub.Object, passwordHasherStub.Object);
+            repoStub = new();
+            providerStub = new();
+            authService = new(tokenServiceStub.Object, userFetcherServiceStub.Object, passwordHasherStub.Object, providerStub.Object, repoStub.Object);
         }
 
         [Fact]
@@ -37,9 +43,9 @@ namespace BalanceApp.Application.UnitTests.Auth
             LoginDto fakeDto = new();
             userFetcherServiceStub.Setup(service => service.GetUserByEmail(It.IsAny<string>())).ReturnsAsync(fakeUser);
             passwordHasherStub.Setup(service => service.VerifyHashedPassword(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>())).Returns(PasswordVerificationResult.Success);
-            tokenServiceStub.Setup(service => service.CreateJwtToken(It.IsAny<User>())).Returns(expected);
+            tokenServiceStub.Setup(service => service.CreateJwtToken(It.IsAny<User>(), It.IsAny<string>())).Returns(expected);
             //Act
-            string result = await authService.Login(fakeDto);
+            var result = await authService.Login(fakeDto);
             //Assert
             result.Should().Be(expected);
         }

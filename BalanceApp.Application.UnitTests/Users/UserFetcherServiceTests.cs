@@ -35,7 +35,7 @@ namespace BalanceApp.Application.UnitTests.Users
             //Assert
             var result = await service.GetAllUser();
             //Act
-            result.Should().BeEquivalentTo(expected, options=>options.ComparingByMembers<User>());
+            result.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<User>());
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace BalanceApp.Application.UnitTests.Users
             //Act
             var result = await service.GetUserByEmail(It.IsAny<string>());
             //Assert
-            result.Should().BeEquivalentTo(expected, options=>options.ComparingByMembers<User>());
+            result.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<User>());
         }
 
         internal static User CreateRandomUser()

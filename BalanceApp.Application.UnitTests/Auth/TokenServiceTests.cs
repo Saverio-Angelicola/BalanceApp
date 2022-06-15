@@ -17,7 +17,7 @@ namespace BalanceApp.Application.UnitTests.Auth
     {
         private readonly Mock<IConfiguration> configStub;
         private readonly Mock<IJwtHandler> jwtHandlerStub;
-        private readonly TokenService tokenService; 
+        private readonly TokenService tokenService;
 
         public TokenServiceTests()
         {
@@ -31,11 +31,11 @@ namespace BalanceApp.Application.UnitTests.Auth
         {
             //Arrange
             string expected = "keyforjwtauthentication";
-            jwtHandlerStub.Setup(handler=>handler.WriteToken(It.IsAny<SecurityToken>())).Returns(expected);
+            jwtHandlerStub.Setup(handler => handler.WriteToken(It.IsAny<SecurityToken>())).Returns(expected);
             configStub.Setup(config => config.GetSection(It.IsAny<string>()).Value).Returns(expected);
             User fakeUser = CreateRandomUser();
             //Act
-            var result = tokenService.CreateJwtToken(fakeUser);
+            var result = tokenService.CreateJwtToken(fakeUser,It.IsAny<string>());
             //Assert
             result.Should().Be(expected);
         }

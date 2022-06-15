@@ -30,13 +30,13 @@ namespace BalanceApp.Application.UnitTests.Users
         {
             //Arrange
             User expected = CreateRandomUser();
-            repositoryStub.Setup(repo=>repo.FindByEmail(It.IsAny<string>())).ReturnsAsync(expected);
+            repositoryStub.Setup(repo => repo.FindByEmail(It.IsAny<string>())).ReturnsAsync(expected);
             hasherStub.Setup(hasher => hasher.VerifyHashedPassword(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>())).Returns(PasswordVerificationResult.Success);
             repositoryStub.Setup(repo => repo.Update(It.IsAny<User>())).ReturnsAsync(expected);
             //Act
             var result = await service.UpdatePassword(It.IsAny<string>(), CreateRandomPasswordDto());
             //Assert
-            result.Should().BeEquivalentTo(expected,options=>options.ComparingByMembers<User>());
+            result.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<User>());
         }
 
         internal static User CreateRandomUser()
