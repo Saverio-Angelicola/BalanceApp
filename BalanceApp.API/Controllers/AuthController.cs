@@ -15,17 +15,21 @@ namespace BalanceApp.API.Controllers
         private readonly IUserFetcherService userFetcherService;
         private readonly IAuthService authService;
         private readonly ITokenService tokenService;
+        private readonly ILogger<AuthController> logger;
 
-        public AuthController(IUserRegistrationService userRegistrationService, 
-                IAuthService authService, 
-                ITokenService tokenService, 
-                IUserFetcherService userFetcherService
+        public AuthController(IUserRegistrationService userRegistrationService,
+                IAuthService authService,
+                ITokenService tokenService,
+                IUserFetcherService userFetcherService,
+                ILogger<AuthController> logger
+
             )
         {
             this.userRegistrationService = userRegistrationService;
             this.authService = authService;
             this.tokenService = tokenService;
             this.userFetcherService = userFetcherService;
+            this.logger = logger;
         }
 
         [HttpPost("register")]
@@ -34,6 +38,23 @@ namespace BalanceApp.API.Controllers
             try
             {
                 return Ok(new UserDto(await userRegistrationService.RegisterUser(registerDto)));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("withings/register")]
+        public async Task<IActionResult> RegisterWithingsAccount()
+        {
+            try
+            {
+                var code = HttpContext.Request.Query["code"].ToString();
+                var email = HttpContext.Request.Query["state"].ToString();
+                await userRegistrationService.RegisterRefreshToken(email, code);
+                return Redirect("https://balanceappclient.pages.dev/login");
+
             }
             catch (Exception ex)
             {
@@ -50,6 +71,8 @@ namespace BalanceApp.API.Controllers
             }
             catch (Exception ex)
             {
+                logger.LogError($"Error - {DateTime.Now} : {ex.Message}");
+                logger.LogError($"email : {user.Email} - password : {user.Password}");
                 return Unauthorized(ex.Message);
             }
 

@@ -1,6 +1,7 @@
 ﻿using BalanceApp.Application.Repositories;
 using BalanceApp.Application.Services.interfaces.Users;
 using BalanceApp.Domain.Entities;
+using BalanceApp.Domain.ValueObjects;
 
 namespace BalanceApp.Application.Services.implementations.Users
 {
@@ -18,7 +19,7 @@ namespace BalanceApp.Application.Services.implementations.Users
             return await userRepository.FindAll();
         }
 
-        public async Task<User> GetUserById(Guid id)
+        public async Task<User> GetUserById(EntityId id)
         {
             return await userRepository.FindById(id);
         }

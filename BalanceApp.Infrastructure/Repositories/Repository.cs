@@ -1,5 +1,6 @@
 ﻿using BalanceApp.Application.Repositories;
 using BalanceApp.Domain.Entities;
+using BalanceApp.Domain.ValueObjects;
 using BalanceApp.Infrastructure.Datas;
 using BalanceApp.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ namespace BalanceApp.Infrastructure.Repositories
             return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<TEntity> FindById(Guid id)
+        public async Task<TEntity> FindById(EntityId id)
         {
             TEntity? entity = await _context.Set<TEntity>().FindAsync(id);
             if (entity is null)

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Headers;
 
 namespace BalanceApp.Infrastructure.Http
 {
     public class Client : HttpClient, IHttpClient
     {
+        public HttpRequestHeaders getRequestHeader()
+        {
+            return DefaultRequestHeaders;
+        }
     }
 }

@@ -14,15 +14,24 @@ namespace BalanceApp.Domain.Entities
         public BirthDate BirthDate { get; set; }
         public string Role { get; private set; }
         public string RefreshToken { get; set; }
-
+        public double Height { get; set; }
         public string LastUpdate { get; set; }
         public DateTime RegisterDate { get; private set; }
 
-        public User() : base(Guid.NewGuid()) 
+        public User() : base(Guid.NewGuid())
         {
+            Firstname = string.Empty;
+            Lastname = string.Empty;
+            Email = string.Empty;
+            UserPassword = string.Empty;
             BodyDataList = new();
+            BirthDate = BirthDate.Create("0/0/0");
+            Role = "User";
+            RefreshToken = string.Empty;
+            LastUpdate = string.Empty;
+            RegisterDate = DateTime.UtcNow;
         }
-        public User(Guid id, string firstname, string lastname, string email, string password, string birthDate,DateTime registerDate, string role = "User") : base(id)
+        public User(Guid id, string firstname, string lastname, string email, string password, string birthDate, DateTime registerDate, string role = "User") : base(id)
         {
             Email = email;
             UserPassword = password;
@@ -30,6 +39,8 @@ namespace BalanceApp.Domain.Entities
             Lastname = lastname;
             BodyDataList = new();
             RegisterDate = registerDate;
+            LastUpdate = String.Empty;
+            RefreshToken = String.Empty;
             BirthDate = BirthDate.Create(birthDate);
             Role = role;
             RefreshToken = "";
@@ -43,6 +54,15 @@ namespace BalanceApp.Domain.Entities
             }
 
             UserPassword = password;
+        }
+
+        public void RegisterRefreshToken(string token)
+        {
+            if(string.IsNullOrEmpty(token))
+            {
+                throw new Exception("token doesn't empty or null");
+            }
+            RefreshToken = token;
         }
 
         public void UpdateRole(char role)

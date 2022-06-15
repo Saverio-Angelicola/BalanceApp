@@ -1,12 +1,19 @@
-﻿ using BalanceApp.Domain.Exceptions;
+﻿using BalanceApp.Domain.Exceptions;
 
 namespace BalanceApp.Domain.ValueObjects
 {
-    public record BirthDate(int days, int months, int years)
+    public record BirthDate
     {
-        public int Days { get; private set; }
-        public int Months { get; private set; }
-        public int Years { get; private set; }
+        public int Days { get; }
+        public int Months { get; }
+        public int Years { get; }
+
+        public BirthDate(int days, int months, int years)
+        {
+            Days = days;
+            Months = months;
+            Years = years;
+        }
 
         public static BirthDate Create(string birthdate)
         {

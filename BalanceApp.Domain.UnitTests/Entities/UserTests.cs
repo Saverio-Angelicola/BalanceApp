@@ -1,10 +1,7 @@
 ﻿using BalanceApp.Domain.Entities;
 using BalanceApp.Domain.Exceptions;
-using BalanceApp.Domain.ValueObjects;
 using FluentAssertions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace BalanceApp.Domain.UnitTests.Entities
@@ -36,7 +33,7 @@ namespace BalanceApp.Domain.UnitTests.Entities
         internal static User CreateRandomUser()
         {
             Guid guid = Guid.NewGuid();
-            return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString(),"1/1/2000", DateTime.UtcNow);
+            return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString(), "1/1/2000", DateTime.UtcNow);
         }
 
     }

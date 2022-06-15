@@ -1,9 +1,13 @@
-﻿using BalanceApp.Application.Services.interfaces.Auth;
+﻿using BalanceApp.API.Controllers;
+using BalanceApp.Application.Services.interfaces.Auth;
 using BalanceApp.Application.Services.interfaces.Users;
 using BalanceApp.Domain.Entities;
-using BalanceApp.UI.Controllers;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace BalanceApp.UI.UnitTests.Controllers
 {
@@ -12,6 +16,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         private readonly Mock<IUserUpdaterService> userUpdaterServiceStub;
         private readonly Mock<IUserDeletionService> userDeletionServiceStub;
         private readonly Mock<ITokenService> tokenServiceStub;
+        private readonly Mock<IUserFetcherService> userFetcherServiceStub;
         private readonly UserController controller;
 
         public UserControllerTests()
@@ -19,20 +24,21 @@ namespace BalanceApp.UI.UnitTests.Controllers
             userUpdaterServiceStub = new();
             tokenServiceStub = new();
             userDeletionServiceStub = new();
-            controller = new(userUpdaterServiceStub.Object, tokenServiceStub.Object, userDeletionServiceStub.Object);
+            userFetcherServiceStub = new();
+            controller = new(userFetcherServiceStub.Object, userUpdaterServiceStub.Object, tokenServiceStub.Object, userDeletionServiceStub.Object);
         }
 
-        /*  [Fact]
+          [Fact]
           public async Task DeleteUser_WithCorrectUser_ReturnsOk()
           {
               //Arrange
               User expected = CreateRandomUser();
-              userServiceStub.Setup(service=>service.DeleteUser(It.IsAny<string>())).ReturnsAsync(expected);
+              userDeletionServiceStub.Setup(service=>service.DeleteUser(It.IsAny<string>())).ReturnsAsync(expected);
               //Act
               var result = await controller.DeleteUser();
               //Assert
               result.Should().BeOfType<OkObjectResult>();
-          } */
+          }
 
         internal static User CreateRandomUser()
         {

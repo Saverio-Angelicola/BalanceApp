@@ -12,10 +12,12 @@ namespace BalanceApp.Application.Services.implementations.Users
         private readonly IUserRepository userRepository;
         private readonly IPasswordHasher<User> passwordHasher;
 
+
         public UserUpdaterService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher)
         {
             this.userRepository = userRepository;
             this.passwordHasher = passwordHasher;
+            
         }
 
         public async Task<User> UpdatePassword(string email, UpdateUserPasswordDto passwordDto)
@@ -44,6 +46,11 @@ namespace BalanceApp.Application.Services.implementations.Users
             if (updatedUser.LastName?.Length > 0)
             {
                 user.Lastname = updatedUser.LastName;
+            }
+
+            if(updatedUser.Role is not null)
+            {
+                user.UpdateRole((char)updatedUser.Role);
             }
 
             return await userRepository.Update(user);

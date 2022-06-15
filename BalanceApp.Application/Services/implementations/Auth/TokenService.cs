@@ -1,5 +1,4 @@
-﻿using BalanceApp.Application.Dtos.Auth;
-using BalanceApp.Application.Services.interfaces.Auth;
+﻿using BalanceApp.Application.Services.interfaces.Auth;
 using BalanceApp.Application.Services.interfaces.Security;
 using BalanceApp.Domain.Entities;
 using Microsoft.Extensions.Configuration;
@@ -19,12 +18,13 @@ namespace BalanceApp.Application.Services.implementations.Auth
             _configuration = configuration;
             this.jwtHandler = jwtHandler;
         }
-        public string CreateJwtToken(User user)
+        public string CreateJwtToken(User user,string withingsToken)
         {
             List<Claim> claims = new()
             {
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Role, user.Role),
+                new Claim(ClaimTypes.SerialNumber, withingsToken),
             };
 
             SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
@@ -43,6 +43,13 @@ namespace BalanceApp.Application.Services.implementations.Auth
             string token = bearerToken.Remove(0, 7);
             string email = jwtHandler.ReadJwtToken(token).Payload.Claims.ElementAt(0).Value;
             return email;
+        }
+
+        public string GetWithingsTokenFromJwtToken(string bearerToken)
+        {
+            string token = bearerToken.Remove(0, 7);
+            string withingsToken = jwtHandler.ReadJwtToken(token).Payload.Claims.ElementAt(2).Value;
+            return withingsToken;
         }
     }
 }

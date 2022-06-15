@@ -1,14 +1,11 @@
-﻿using BalanceApp.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BalanceApp.Application.Dtos.BodyData;
+using BalanceApp.Domain.ValueObjects;
 
 namespace BalanceApp.Application.Services.interfaces.BodyDatas
 {
     public interface IBodyDataFetcherService
     {
-        Task<List<BodyData>> GetAllBodyData(string userEmail);
+        Task<BodyDataListDto> GetAllBodyData(string userEmail, string withingsToken);
+        Task<BodyDataListDto> GetBodyDataById(Guid id);
     }
 }

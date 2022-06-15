@@ -1,11 +1,11 @@
-﻿using BalanceApp.Application.Dtos.Auth;
-using BalanceApp.Domain.Entities;
+﻿using BalanceApp.Domain.Entities;
 
 namespace BalanceApp.Application.Services.interfaces.Auth
 {
     public interface ITokenService
     {
-        string CreateJwtToken(User user);
+        string CreateJwtToken(User user, string withingsToken);
         string GetEmailFromJwtToken(string bearerToken);
+        string GetWithingsTokenFromJwtToken(string bearerToken);
     }
 }

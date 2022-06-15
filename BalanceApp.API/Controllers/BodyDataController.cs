@@ -11,41 +11,24 @@ namespace BalanceApp.API.Controllers
     public class BodyDataController : ControllerBase
     {
         private readonly IBodyDataFetcherService bodyDataFetcherService;
-        private readonly IBodyDataCreatorService bodyDataCreatorService;
         private readonly ITokenService tokenService;
 
-        public BodyDataController(IBodyDataFetcherService bodyDataFetcherService, ITokenService tokenService, IBodyDataCreatorService bodyDataCreatorService)
+        public BodyDataController(IBodyDataFetcherService bodyDataFetcherService, ITokenService tokenService)
         {
             this.bodyDataFetcherService = bodyDataFetcherService;
             this.tokenService = tokenService;
-            this.bodyDataCreatorService = bodyDataCreatorService;
         }
 
-        [HttpGet,Authorize]
+        [HttpGet, Authorize]
         public async Task<IActionResult> GetAllBodyData()
         {
             try
             {
                 string bearerToken = HttpContext.Request.Headers.Authorization;
                 string email = tokenService.GetEmailFromJwtToken(bearerToken);
-                var list = await bodyDataFetcherService.GetAllBodyData(email);
+                string token = tokenService.GetWithingsTokenFromJwtToken(bearerToken);
+                var list = await bodyDataFetcherService.GetAllBodyData(email,token);
                 return Ok(list);
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPost, Authorize]
-        public async Task<IActionResult> AddBodyData(BodyDataDto bodyData)
-        {
-            try
-            {
-                string bearerToken = HttpContext.Request.Headers.Authorization;
-                string email = tokenService.GetEmailFromJwtToken(bearerToken);
-                await bodyDataCreatorService.AddBodyData(email, bodyData);
-                return Ok();
             }
             catch (Exception ex)
             {

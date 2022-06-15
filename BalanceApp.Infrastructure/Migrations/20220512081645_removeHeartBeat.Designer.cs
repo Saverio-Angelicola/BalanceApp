@@ -3,6 +3,7 @@ using System;
 using BalanceApp.Infrastructure.Datas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BalanceApp.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220512081645_removeHeartBeat")]
+    partial class removeHeartBeat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,9 +40,6 @@ namespace BalanceApp.Infrastructure.Migrations
                     b.Property<string>("Firstname")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<double>("Height")
-                        .HasColumnType("double precision");
 
                     b.Property<string>("LastUpdate")
                         .IsRequired()
@@ -92,9 +91,8 @@ namespace BalanceApp.Infrastructure.Migrations
                             b1.Property<double>("BoneRate")
                                 .HasColumnType("double precision");
 
-                            b1.Property<string>("CreatedAt")
-                                .IsRequired()
-                                .HasColumnType("text");
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<double>("FatMassRate")
                                 .HasColumnType("double precision");

@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BalanceApp.Infrastructure.ResponseObjects
+﻿namespace BalanceApp.Infrastructure.ResponseObjects
 {
     public record Token
     {
-        public string AccessToken { get; set; }
-        public string RefreshToken { get; set; }
+        public string access_token { get; set; }
+        public string refresh_token { get; set; }
+
+        public Token()
+        {
+            access_token = string.Empty;
+            refresh_token = string.Empty;
+        }
     }
 }

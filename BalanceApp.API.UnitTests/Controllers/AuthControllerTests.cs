@@ -4,13 +4,13 @@ using BalanceApp.Application.Dtos.Users;
 using BalanceApp.Application.Services.interfaces.Auth;
 using BalanceApp.Application.Services.interfaces.Users;
 using BalanceApp.Domain.Entities;
-using BalanceApp.UI.Controllers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
 using System.Threading.Tasks;
 using Xunit;
+using Microsoft.Extensions.Logging;
 
 namespace BalanceApp.UI.UnitTests.Controllers
 {
@@ -20,6 +20,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         private readonly Mock<IUserFetcherService> userFetcherServiceStub;
         private readonly Mock<IAuthService> authServiceStub;
         private readonly Mock<ITokenService> tokenServiceStub;
+        private readonly Mock<ILogger<AuthController>> loggerStub;
         private readonly AuthController authController;
         public AuthControllerTests()
         {
@@ -27,7 +28,8 @@ namespace BalanceApp.UI.UnitTests.Controllers
             authServiceStub = new();
             tokenServiceStub = new();
             userFetcherServiceStub = new();
-            authController = new(userRegistrationServiceStub.Object, authServiceStub.Object, tokenServiceStub.Object, userFetcherServiceStub.Object);
+            loggerStub = new();
+            authController = new(userRegistrationServiceStub.Object, authServiceStub.Object, tokenServiceStub.Object, userFetcherServiceStub.Object,loggerStub.Object) ;
         }
 
         [Fact]
@@ -69,7 +71,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         public async Task Login_WithCorrectUser_ReturnsOk()
         {
             //Arrange
-            string expected = "jsonWebToken";
+            var expected = CreateRandomTokenDto();
             authServiceStub.Setup(service => service.Login(It.IsAny<LoginDto>())).ReturnsAsync(expected);
             //Act
             var result = await authController.Login(It.IsAny<LoginDto>());
@@ -81,7 +83,7 @@ namespace BalanceApp.UI.UnitTests.Controllers
         public async Task Login_WithCorrectUser_ReturnsTokenDto()
         {
             //Arrange
-            string expected = "jsonWebToken";
+            var expected = CreateRandomTokenDto();
             authServiceStub.Setup(service => service.Login(It.IsAny<LoginDto>())).ReturnsAsync(expected);
             //Act
             var result = await authController.Login(It.IsAny<LoginDto>()) as OkObjectResult;
@@ -139,6 +141,12 @@ namespace BalanceApp.UI.UnitTests.Controllers
         {
             Guid guid = Guid.NewGuid();
             return new(guid, guid.ToString(), guid.ToString(), guid.ToString(), guid.ToString(), "1/1/2000", DateTime.UtcNow);
+        }
+
+        internal static AuthTokenDto CreateRandomTokenDto()
+        {
+            Guid guid = Guid.NewGuid();
+            return new(guid.ToString());
         }
     }
 }
